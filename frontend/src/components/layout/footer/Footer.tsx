@@ -32,31 +32,6 @@ export const footerItems = [
         ],
     },
     {
-        title: "About us",
-        items: [
-            {
-                label: "All articles",
-                href: "#",
-            },
-            {
-                label: "Tips",
-                href: "#",
-            },
-            {
-                label: "Learning to cook",
-                href: "#",
-            },
-            {
-                label: "Ingredients",
-                href: "#",
-            },
-            {
-                label: "Utensils",
-                href: "#",
-            }
-        ],
-    },
-    {
         title: "Collaborators for this  project",
         items: [
             {
@@ -138,12 +113,11 @@ export const Footer = () => {
                     <FooterSocials>
                         {socialLinks.map((link, idx) => (
                             <li key={idx}>
-                                <a href={link.href} target="_blank" rel="noopener noreferrer">
-                                    <FontAwesomeIcon
-                                        icon={link.icon}
-                                        style={{ fontSize: "20px" }}
-                                    />
-                                </a>
+                                <FontAwesomeIcon
+                                    icon={link.icon}
+                                    style={{ fontSize: "20px" }}
+                                    className="icon"
+                                />
                             </li>
                         ))}
                     </FooterSocials>

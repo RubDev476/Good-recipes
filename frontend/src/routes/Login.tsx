@@ -1,4 +1,3 @@
-import { Form } from "../components/ui/Form/Form"
 import { InputField } from "../components/ui/InputField/InputField"
 
 export default function Login() {
@@ -9,22 +8,22 @@ export default function Login() {
                     {/* svg background */}
                 </div>
 
-                <Form className="form">
+                <form className="form">
                     <h3 className="formTitle">Login</h3>
 
                     <InputField
-                        labelName="Email *"
+                        labelName="Email"
                         fieldId="email"
                         fieldName="emailField"
-                        fieldPlaceholder="Email*"
+                        fieldPlaceholder=""
                         fieldType="email"
                         autoComplete="off"
                     />
                     <InputField
-                        labelName="Password *"
+                        labelName="Password"
                         fieldId="password"
                         fieldName="passwordField"
-                        fieldPlaceholder="Password *"
+                        fieldPlaceholder=""
                         fieldType="password"
                         autoComplete="off"
                     />
@@ -34,7 +33,7 @@ export default function Login() {
                     >
                         Login
                     </button>
-                </Form>
+                </form>
             </section>
         </>
     )

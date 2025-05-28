@@ -18,7 +18,6 @@ export const CategoryLayout: React.FC<Props> = ({ title, cards }) => {
             </S.Image_container>
             <S.Titles_container>
                 <h4>{title}</h4>
-                <p>All Categories</p>
             </S.Titles_container>
             <S.Card_container>
                 {

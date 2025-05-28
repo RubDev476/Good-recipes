@@ -59,190 +59,108 @@ html {
     width: 100%;
 }
 
-@media screen and (min-width: 1280px) {
-    .container {
-        padding: 0;
-    }
-}
+.formContainer {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
 
-/* Desktop and large screen devices like tablets */
-@media screen and (min-width: 992px) {
-    .formContainer {
+    .formImage {
+        height: 10rem;
+        width: 100%;
+        max-width: 100dvw;
+        background-image: url("/images/form-pages.webp");
+        background-position: center;
+        background-size: cover;
+    }
+
+    .form {
         width: 100%;
         display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        margin: 2rem 0 2rem 0;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 2rem 0;
 
-        .formImage {
-            width: 50%;
-            height: 30rem;
-            background-image: url("/images/form-pages.webp");
-            background-size: 100% 150%;
+        .formTitle {
+            width: 100%;
+            text-align: center;
+            font-size: 1.3em;
         }
 
-        .form {
-            width: 40%;
+        .inputFieldContainer {
+            width: 90%;
             display: flex;
             flex-flow: column;
             align-items: center;
             justify-content: center;
+            margin-bottom: 25px;
+            max-width: 350px;
 
-            .formTitle {
+            .inputFieldLabel {
                 width: 100%;
-                text-align: center;
-                font-size: 1rem;
+                height: 1.2rem;
+                cursor: pointer;
+                text-align: left;
+                margin-bottom: 5px;
             }
 
-            .inputFieldContainer {
+            .inputField {
+                background-color: transparent;
                 width: 100%;
-                max-width: 100%;
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                justify-content: center;
-
-                .inputFieldLabel {
-                    max-width: 100%;
-                    height: 1.2rem;
-                    margin: 1rem 0 .5rem 0;
-                    cursor: pointer;
-                    text-align: left;
-
-                }
-
-                .inputField {
-                    background-color: transparent;
-                    width: 25rem;
-                    max-width: 30rem;
-                    padding: 0.5rem;
-                    margin-top: 8px;
-                    margin-bottom: 5px;
-                    border-radius: 0.125rem;
-                    border: 1px solid var(--color-7);
-                    outline: 1px solid var(--color-5);
-                    transition: all 0.3s ease-in-out;
-                    font-size: 12px;
-                    text-align: center;
-                }
-
-                .inputField:focus {
-                    outline: 1px solid var(--color-14);
-                }
-            }
-
-            .submitButton {
-                margin: 2rem 0 0 0;
-                padding: .5rem;
-                border-radius: 100px;
-                width: 10rem;
+                padding: 0.5rem;
+                border-radius: 2rem;
+                border: 1px solid var(--color-1);
+                outline: 1px solid transparent;
                 transition: all 0.3s ease-in-out;
-                background-color: var(--color-1);
-                color: var(--color-5);
-                border: 1px solid var(--color-1);
+                font-size: 1em;
+                text-align: center;
+                box-sizing: border-box;
             }
 
-            .submitButton:hover {
-                margin: 2rem 0 0 0;
-                padding: .5rem;
-                border-radius: 100px;
-                background-color: var(--color-5);
-                color: var(--color-1);
-                border: 1px solid var(--color-1);
-                font-weight: bold;
+            .inputField:focus {
+                outline: 1px solid var(--color-1);
             }
+        }
+
+        .submitButton {
+            margin: 2rem 0 0 0;
+            padding: .5rem;
+            border-radius: 100px;
+            width: 10rem;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--color-1);
+            color: var(--color-5);
+            border: 1px solid var(--color-1);
+        }
+
+        .submitButton:hover {
+            margin: 2rem 0 0 0;
+            padding: .5rem;
+            border-radius: 100px;
+            background-color: var(--color-5);
+            color: var(--color-1);
+            border: 1px solid var(--color-1);
+            font-weight: bold;
         }
     }
 }
 
-/* Mobile */
-@media screen and (width <= 992px) {
+@media screen and (min-width: 940px) {
     .formContainer {
-        width: 100%;
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0 2rem 0;
-
-        .formImage {
-            height: 10rem;
-            width: 100%;
-            max-width: 100dvw;
-            background-image: url("/images/form-pages.webp");
-            background-position: center;
-            background-size: cover;
-        }
-
-        .form {
-            width: 100%;
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: center;
-            justify-content: center;
-
-            .formTitle {
-                width: 100%;
-                text-align: center;
-                font-size: 1rem;
-                
-            }
-
-            .inputFieldContainer {
-                width: 90%;
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                justify-content: center;
-
-                .inputFieldLabel {
-                    width: 100%;
-                    height: 1.2rem;
-                    margin: 1rem 0 .5rem 0;
-                    cursor: pointer;
-                    text-align: left;
-                }
-
-                .inputField {
-                    background-color: transparent;
-                    width: 100%;
-                    padding: 0.5rem;
-                    margin-top: 8px;
-                    margin-bottom: 5px;
-                    border-radius: 0.125rem;
-                    border: 1px solid var(--color-7);
-                    outline: 1px solid var(--color-5);
-                    transition: all 0.3s ease-in-out;
-                    font-size: 12px;
-                    text-align: center;
-                    box-sizing: border-box;
-                }
-
-                .inputField:focus {
-                    outline: 1px solid var(--color-14);
-                }
-            }
-
-            .submitButton {
-                margin: 2rem 0 0 0;
-                padding: .5rem;
-                border-radius: 100px;
-                width: 10rem;
-                transition: all 0.3s ease-in-out;
-                background-color: var(--color-1);
-                color: var(--color-5);
-                border: 1px solid var(--color-1);
-            }
-
-            .submitButton:hover {
-                margin: 2rem 0 0 0;
-                padding: .5rem;
-                border-radius: 100px;
-                background-color: var(--color-5);
-                color: var(--color-1);
-                border: 1px solid var(--color-1);
-                font-weight: bold;
+            font-size: 18px;
+            flex-direction: row;
+    
+            .formImage {
+                height: 70vh;
             }
         }
+}
+
+@media screen and (min-width: 1280px) {
+    .container {
+        padding: 0;
     }
 }

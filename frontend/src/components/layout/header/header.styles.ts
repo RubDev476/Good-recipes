@@ -38,11 +38,6 @@ export const HeaderContainer = styled.header`
         font-weight: 600;
         font-size: .8em;
         margin-left: 8px;
-        
-        &:hover {
-            background-color: var(--color-1);
-            color: var(--color-5);
-        }
     }
 
     @media screen and (min-width: 640px) {

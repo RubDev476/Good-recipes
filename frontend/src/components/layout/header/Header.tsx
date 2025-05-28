@@ -1,9 +1,6 @@
 import { Link } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMartiniGlassCitrus,
-    faCutlery
-} from "@fortawesome/free-solid-svg-icons";
+import {faMartiniGlassCitrus, faCutlery} from "@fortawesome/free-solid-svg-icons";
 
 import Logo from "../../ui/Logo.tsx";
 
@@ -28,7 +25,6 @@ export const Header = () => {
 
                 <div>
                     <Link to={'/login'} className={"link-1"}>Login</Link>
-
                     <Link to={'/register'} className={"link-2"}>Register</Link>
                 </div>
             </Nav>

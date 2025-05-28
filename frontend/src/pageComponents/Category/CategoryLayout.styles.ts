@@ -21,20 +21,12 @@ export const Titles_container = styled.article`
         align-self: center;
         font-size: 40px;
     }
-    p{
-        font-size: 30px;
-        font-weight: bolder;
-
-        @media (width < 767px) {
-            align-self: center;
-        }
-    }
-
 `
 
 export const Card_container = styled.main`
     display: grid;
-    margin: 0 3% 5% 3%;
+    margin: 0 9% 4rem;
+    flex-wrap: wrap;
     grid-template-columns: repeat(
         auto-fit, minmax(250px, 1fr)
         );

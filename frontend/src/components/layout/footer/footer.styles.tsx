@@ -158,7 +158,7 @@ export const FooterSocials = styled.ul`
   li:last-child {
     margin-left: 0;
   }
-  li a {
+  li .icon {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -21,7 +21,7 @@ export const Container = styled.section`
     &:hover{
         *box-shadow: 0 8px 16px rgba(0, 0, 0, 0.51); 
         img{
-            transform:scale(1.1) rotate(-5deg);
+            transform:scale(1.1);
         }
         
         .container-image {
@@ -39,13 +39,13 @@ export const Container_image = styled.div`
     height: 200px;
     background: #ffffff;
     overflow:hidden;
-    transition: all .4s ease-in-out;
+    transition: all .3s ease-in-out;
     
     img {
         object-fit: cover;
         width: 100%;
         height: 100%;
-        transition: transform .4s ease-in-out;
+        transition: transform .3s ease-in-out;
     }
     `
 
@@ -58,5 +58,7 @@ export const Container_p = styled.article`
     p {
         font-weight: bolder;
         font-size: 20px;
+        margin: 0;
+        padding: 10px 0;
     }
 `
