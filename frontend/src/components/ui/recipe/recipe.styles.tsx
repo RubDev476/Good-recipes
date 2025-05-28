@@ -8,7 +8,7 @@ export const RecipeContainer = styled.div`
 
     display: block;
     max-width: 100%;
-    margin: 0 auto;
+    margin: 40px auto 0;
     padding: 0 1rem;
     background-color: transparent;
 
@@ -27,67 +27,14 @@ export const RecipeContainer = styled.div`
     }
 `;
 
-export const RecipeTop = styled.section`
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-
-    .breadcrumb {
-        position: initial;
-        margin-bottom: 0;
-        margin-top: 0;
-        margin-left: 0;
-        height: auto;
-    }
-
-    .breadcrumb ol {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        column-gap: 0.25rem;
-        align-items: center;
-    }
-
-    .breadcrumb ol li {
-        position: relative;
-        display: none;
-        font-size: 0.875rem;
-    }
-
-    .breadcrumb ol li a {
-        cursor: pointer;
-        text-decoration: none;
-        color: var(--color-3);
-    }
-
-    @media (min-width: 992px) {
-        grid-area: top;
-
-        .breadcrumb {
-            width: auto;
-        }
-
-        .breadcrumb ol li {
-            display: block;
-        }
-
-        .breadcrumb ol li a {
-            color: var(--color-2);
-        }
-
-        .breadcrumb ol li:nth-child(2):before {
-            content: ">";
-            margin-right: 0.25rem;
-        }
-    }
-`;
-
 export const RecipeMain = styled.main`
     display: flex;
     flex-direction: column;
 
     .recipe__image {
         position: relative;
-        margin-bottom: 0.75rem;
+        *margin: auto;
+        max-width: 400px;
 
         img {
             display: block;
@@ -402,21 +349,9 @@ export const RecipeFooter = styled.section`
         border: 1px solid var(--color-1);
     }
 
-    .recipe__comments__login__actions .btn-primary:hover {
-        color: var(--color-5);
-        background: var(--color-1);
-        border: 1px solid var(--color-1);
-    }
-
     .recipe__comments__login__actions .btn-secondary {
         color: var(--color-5);
         background: var(--color-1);
-        border: 1px solid var(--color-1);
-    }
-
-    .recipe__comments__login__actions .btn-secondary:hover {
-        color: var(--color-1);
-        background: transparent;
         border: 1px solid var(--color-1);
     }
 

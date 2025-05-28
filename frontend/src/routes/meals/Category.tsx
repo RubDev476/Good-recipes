@@ -5,9 +5,12 @@ import { getRecipes } from "../../api/api-actions";
 import type { ApiMealCategory } from "../../types/api-types";
 
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
+import Loader from "../../components/ui/Loader.tsx";
+import { Heading } from "../../pageComponents/recipes/recipesLayout.ts";
 
 export default function CategoryMeals() {
     const [recipes, setRecipes] = useState<ApiMealCategory[]>([]);
+    const [loading, setLoading] = useState(true);
     const [nameCategory, setCategory] = useState('');
 
     const location = useLocation();
@@ -15,6 +18,7 @@ export default function CategoryMeals() {
     useEffect(() => {
         const fetchCategory = async () => {
             const category = location.pathname.split('/')[3];
+            setCategory(category);
 
             try {
                 const data: ApiMealCategory[] = await getRecipes(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
@@ -22,7 +26,7 @@ export default function CategoryMeals() {
                 //console.log(data);
 
                 setRecipes(data);
-                setCategory(category)
+                setLoading(false);
             } catch (error) {
                 console.log(error);
                 setRecipes([]);
@@ -33,6 +37,18 @@ export default function CategoryMeals() {
     }, [location])
 
     return (
-        <RecipesLayout recipes={recipes} tag={'meals'} title={nameCategory} />
+        <>
+            <Heading>
+                <img src="/images/category-recipes.webp" alt="top-image" className={'w-full'} />
+
+                <h1>{nameCategory}</h1>
+            </Heading>
+
+            {!loading ? (
+                <RecipesLayout recipes={recipes} tag={'meals'} title="" />
+            ): (
+                <Loader />
+            )}
+        </>
     )
 }

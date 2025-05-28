@@ -9,13 +9,15 @@ export type SliderProps = {
 
 export type SectionSliderProps = Pick<SliderProps, 'recipes' | 'tag'> & {title: string};
 
-export type CardRecipeProps = Pick<SectionSliderProps, 'tag' | 'title'> & {
+export type CardRecipeProps = Pick<SectionSliderProps, 'tag'> & {
     img: string;
     id: string;
+    title: string
 }
 
-export type ViewMoreSectionProps = Pick<SectionSliderProps, 'tag' | 'title'> & {
-    nameCategories: string[]
+export type ViewMoreSectionProps = Pick<SectionSliderProps, 'tag'> & {
+    nameCategories: string[];
+    title: string;
 };
 
 export type RecipeProps = {

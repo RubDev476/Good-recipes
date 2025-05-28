@@ -1,14 +1,12 @@
 import {Link} from "react-router";
 import {
     RecipeContainer,
-    RecipeTop,
     RecipeMain,
     RecipeSidebar,
     RecipeFooter as RecipeFooterComponent,
 } from "../../../components/ui/recipe/recipe.styles";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    faHome,
     faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -32,8 +30,6 @@ export const RecipeComponent = ({recipe}: RecipeProps) => {
     
     return (
         <RecipeContainer>
-            <RecipeBreadcrumb/>
-            
             <RecipeMain>
                 <div className="recipe__image">
                     {recipe.strMealThumb && <img src={recipe.strMealThumb} alt={"recipe-image"}/>}
@@ -56,29 +52,6 @@ export const RecipeComponent = ({recipe}: RecipeProps) => {
                 <RecipeFooter/>
             </RecipeFooterComponent>
         </RecipeContainer>
-    );
-};
-
-const RecipeBreadcrumb = () => {
-    return (
-        <RecipeTop>
-            <nav
-                className="breadcrumb"
-                role="navigation"
-                aria-labelledby="system-breadcrumb"
-            >
-                <ol>
-                    <li>
-                        <Link to="#">
-                            <FontAwesomeIcon icon={faHome}/>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="#">Categoríes</Link>
-                    </li>
-                </ol>
-            </nav>
-        </RecipeTop>
     );
 };
 
@@ -168,10 +141,10 @@ const RecipeFooter = () => {
                 </h2>
                 
                 <div className="recipe__comments__login__actions">
-                    <Link to="#" className="btn btn-primary">
+                    <Link to="/login" className="btn btn-primary">
                         Login
                     </Link>
-                    <Link to="#" className="btn btn-secondary">
+                    <Link to="/register" className="btn btn-secondary">
                         Register
                     </Link>
                 </div>
