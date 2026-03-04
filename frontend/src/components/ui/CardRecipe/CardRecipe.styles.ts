@@ -51,7 +51,7 @@ export const Tag_food = styled.p`
     color: #ffffff;
     background-color: #ea4335;
     font-size: calc(13px + .3vw);
-    padding: 7px 10px;
+    padding: 7px;
     border-radius: 100%;
 `
 export const Tag_drinks = styled.p`

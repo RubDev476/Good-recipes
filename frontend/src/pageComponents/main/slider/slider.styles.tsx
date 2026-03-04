@@ -11,7 +11,11 @@ export const SliderContainer = styled.div`
         width: 50px;
         height: 100%;
         top: 0px;
-        color: #e50077;
+
+        svg {
+            color: #e50077;
+            width: 22px;
+        }
     }
 
     .swiper-button-prev {
