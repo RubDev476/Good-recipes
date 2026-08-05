@@ -3,7 +3,7 @@ import type { SliderFeatures } from '../types/global';
 
 const sliderResize = (): SliderFeatures => {
     const width = window.innerWidth;
-    let features: SliderFeatures = { slidesView: 3, pagination: true, navigation: false };
+    const features: SliderFeatures = { slidesView: 3, pagination: true, navigation: false };
 
     if (width < 480) {
         features.slidesView = 1;
