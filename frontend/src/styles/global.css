@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap');
 
 :root {
     --color-1: #e50077;
@@ -17,14 +18,42 @@
     --color-14: #471f05;
     --color-15: #db3229;
     --swiper-theme-color: var(--color-1);
+
+
+    /*NEW variables*/
+    --background: #0d0c0b;
+    --foreground: #f2ede3;
+    --card: #161412;
+    --card-foreground: #f2ede3;
+    --primary: #e8187a;
+    --primary-foreground: #ffffff;
+    --secondary: #1f1d1a;
+    --secondary-foreground: #c8bfb0;
+    --muted: #2a2724;
+    --muted-foreground: #8a7f70;
+    --accent: #f5c842;
+    --accent-foreground: #0d0c0b;
+    --border: #2a2724;
+    --ring: #e8187a;
+    --radius: 0.75rem;
+    --font-fraunces: 'Fraunces', serif;
+    --font-outfit: 'Outfit', sans-serif;
 }
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
-* {
-    font-family: "Kumbh Sans", serif;
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-fraunces);
 }
 
 .text-color-1 {

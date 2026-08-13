@@ -4,124 +4,109 @@ export const HeaderContainer = styled.header`
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: #e50077;
+    background-color: var(--card);
+    border-bottom: solid 1px var(--border); 
     z-index: 900;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     font-size: 1rem;
-    
+
     /*CREATE A REUSABLE COMPONENT LATER*/
     .link-1 {
         border-radius: 50px;
         transition: all .3s ease-in-out;
-        background-color: var(--color-1);
-        color: var(--color-5);
+        color: var(--foreground);
         text-decoration: none;
-        border: solid 1px var(--color-5);
-        padding: 6px 25px;
+        border: solid 1px var(--border);
+        padding: 8px 16px;
         font-weight: 600;
-        font-size: .8em;
+        font-size: .9em;
         
         &:hover {
-            background-color: var(--color-5);
-            color: var(--color-1);
+            background-color: var(--border);
         }
     }
     
     .link-2 {
         border-radius: 50px;
         transition: all .3s ease-in-out;
-        background-color: var(--color-5);
-        color: var(--color-1);
+        background-color: var(--primary);
+        color: var(--primary-foreground);
         text-decoration: none;
-        border: solid 1px var(--color-5);
-        padding: 6px 25px;
+        padding: 8px 16px;
         font-weight: 600;
-        font-size: .8em;
+        font-size: .9em;
         margin-left: 8px;
-    }
 
-    @media screen and (min-width: 640px) {
-        font-size: 1.1rem;
-    }
-
-    @media screen and (min-width: 940px) {
-        font-size: 1.4rem;
+        &:hover {
+            opacity: 90%;
+        }
     }
 `;
 
 export const Nav = styled.nav`
     width: 100%;
-    max-width: calc(74.375rem + 160px);
+    max-width: 1280px;
     margin: auto;
     box-sizing: border-box;
-    padding: .3rem 1rem;
+    padding: .7rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .name-site {
+        display: none;
+        color: var(--foreground);
+        font-weight: 800;
+        font-size: 1.2rem;
+        margin-left: 10px;
+    }
     
     @media screen and (min-width: 940px) {
-        padding: .4rem 1rem;
+        //padding: .4rem 1rem;
+    }
+
+    @media screen and (min-width: 720px) {
+        .name-site {
+            display: block;
+        }
     }
 `;
 
 export const LogoContainer = styled.div`
+    background-color: var(--primary);
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+
     svg {
-        width: 47px;
-        height: 47px;
-    }
-    
-    @media screen and (min-width: 940px) {
-        svg {
-            width: 60px;
-            height: 60px;
-        }
+        width: 40px;
+        height: 40px;
     }
 `;
 
 export const Routes = styled.div`
-    *display: flex;
-    *align-items: center;
-    *justify-content: center;
-    margin-left: 30px;
     display: none;
     
     a {
         text-decoration: none;
-        color: var(--color-5);
+        color: var(--secondary-foreground);
         position: relative;
-        margin-right: 20px;
-        font-size: .8em;
-        font-weight: 300;
+        font-size: .9em;
+        font-weight: 600;
         
         .icon {
-            margin-right: 5px;
+            width: 1em;
+            height: 1em;
+            margin-right: 7px;
         }
-        
-        &::after {
-            content: '';
-            background-color: var(--color-5);
-            width: 0;
-            height: 3px;
-            border-radius: 10px;
-            position: absolute;
-            left: 0;
-            bottom: -6px;
-            transition: width .2s ease-in-out;
-        }
-        
-        &:hover::after {
-            width: 100%;
-        }
+    }
+
+    a.current-path-color {
+        color: var(--primary);
     }
     
     @media screen and (min-width: 640px) {
-        display: block;
-    }
-
-    @media screen and (min-width: 940px) {
-        a::after {
-            height: 4px;
-            bottom: -10px;
-        }
+        display: flex;
+        gap: 2em;
     }
 `;
