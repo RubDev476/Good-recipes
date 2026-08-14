@@ -3,12 +3,18 @@ import { useEffect, useState, useCallback } from "react";
 import type { ApiCategory } from "../../../types/api-types";
 import type { SliderFeatures } from "../../../types/global";
 
-import { Greeting, ImageContainer } from "./mainContent.styles";
+import { 
+    ContentContainer,
+    Greeting,
+    LinksContainer,
+    Welcome
+} from "./mainContent.styles";
 
 import Slider from "../slider/Slider";
 import Spinner from "../../../components/ui/spinner/Spinner";
- 
+
 import useSliderFeatures from "../../../hooks/useSliderFeatures";
+import { Link } from "react-router";
 
 const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
     "morning": [
@@ -140,53 +146,77 @@ const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
 }
 
 export default function MainContent() {
-    const [state, setState] = useState<{hour: string, size: SliderFeatures | null}>({ hour: "", size: null });
-
-    const {features} = useSliderFeatures();
-
-    const getGreeting = useCallback(() => {
-        const hour = new Date().getHours();
-        let greeting = "";
-
-        if (hour < 12) {
-            greeting = "morning";
-        } else if (hour < 18) {
-            greeting = "afternoon";
-        } else {
-            greeting = "evening";
-        }
-
-        setState(prevState => ({ ...prevState, hour: greeting }));
-    }, []);
-
-    useEffect(() => {
-        getGreeting();
-
-    }, [getGreeting]);
-
-    const { hour } = state;
+    const hour = new Date().getHours();
+    const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
     return (
         <main>
-            <ImageContainer>
-                <picture>
-                    <source srcSet="https://www.recetasnestle.com.mx/sites/default/files/styles/webp/public/2022-07/header-all-categories-mobile.jpg.webp?itok=zaGz___N" media="(max-width: 940px)" />
-                    <img src="https://www.recetasnestle.com.mx/sites/default/files/styles/webp/public/2022-07/header-all-categories-desktop.jpg.webp?itok=mtKSyTLV" alt="main-img" width={390} height={40} />
-                </picture>
-            </ImageContainer>
+            <div
+                style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    background: 'linear-gradient(135deg, #1a0e10 0%, #0d0c0b 50%, #0e1015 100%)'
+                }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        opacity: '20%',
+                        inset: '0px'
+                    }}
+                >
+                    <img
+                        src="https://images.unsplash.com/photo-1505498753650-ac9cb50b158d?w=1600&h=500&fit=crop&auto=format"
+                        alt="Hero"
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                        }}
+                    />
+                </div>
 
-            {(hour !== '' && features) ? (
-                <>
-                    <div className="container">
-                        <Greeting className="text-color-1">{`Good ${hour}.`} </Greeting>
-                        <h2 className="slider-title">Welcome to Good Recipes</h2>
-                    </div>
+                <div
+                    style={{
+                        background: 'linear-gradient(to bottom, rgba(13,12,11,0.3) 0%, rgba(13,12,11,0.95) 100%)',
+                        position: 'absolute',
+                        inset: '0px'
+                    }}
+                />
 
-                    <Slider recipes={MAIN_RECIPES[hour]} tag={hour === 'evening' ? 'cocktails' : 'meals'} sliderFeatures={features} />
-                </>
-            ) : (
-                <Spinner />
-            )}
+                <ContentContainer>
+                    <Greeting>
+                        {greeting}
+                    </Greeting>
+
+                    <Welcome>
+                        Welcome to<br />
+                        <span style={{ color: 'var(--primary)' }}>Good Recipes</span>
+                    </Welcome>
+
+                    <p
+                        style={{ 
+                            color: 'var(--secondary-foreground)',
+                            fontSize: '18px',
+                            lineHeight: '1.5',
+                            maxWidth: '448px',
+                            //margin: '0px'
+                        }}
+                    >
+                        Thousands of recipes crafted for every moment — from quick breakfasts to weekend feasts.
+                    </p>
+
+                    <LinksContainer>
+                        <Link to={'/meals'} className="link-2">
+                            Explore recipes
+                        </Link>
+
+                        <Link to={'/cocktails'} className="link-1">
+                            View cocktails
+                        </Link>
+                    </LinksContainer>
+                </ContentContainer>
+            </div>
         </main>
     )
 }
