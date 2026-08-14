@@ -1,232 +1,118 @@
 import styled from "styled-components";
-import { Link } from "react-router";
 
 export const StyledFooter = styled.footer`
-  width: 100%;
-  background-color: var(--color-8);
-  padding: 1rem 0;
-  @media (min-width: 992px) {
-    padding: 3.125rem 0 1.875rem;
-  }
+    background-color: var(--secondary);
+    border-top: 1px solid var()--border;
 `;
 
 export const Container = styled.div`
-  display: block;
-  max-width: 100%;
-  max-width: 74.375rem;
-  margin: 0 auto;
-  padding: 0 1rem;
-  @media (min-width: 992px) {
+    box-sizing: border-box;
+    max-width: 1280px;
+    padding: 3.5rem 1.5rem;
+    margin-inline: auto;
+`;
+
+export const GridContainer = styled.div`
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
-    position: relative;
-    gap: 2.5rem 2.5rem;
-    grid-template-areas:
-      "nav logo"
-      "copy copy";
-  }
-`;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2.5rem;
 
-export const FooterNavigation = styled.nav`
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 100%;
-  gap: 0;
-  margin-bottom: 1.875rem;
-  grid-area: nav;
-  @media (min-width: 992px) {
-    margin-bottom: 0;
-  }
-`;
-
-export const FooterMenuNavigation = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: auto auto auto auto;
-  gap: 0;
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(4, calc(25% - 2.5rem));
-    grid-template-rows: 100%;
-    gap: 0 2.5rem;
-    justify-content: space-between;
-    border-right: 1px solid var(--color-7);
-    padding-right: 2.5rem;
-  }
-`;
-
-export const FooterMenuNavigationLi = styled.li`
-  position: relative;
-  border-bottom: 1px solid var(--color-7);
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  @media (min-width: 992px) {
-    border-bottom: none;
-  }
-`;
-
-export const FooterMenuNavigationUl = styled.ul`
-  list-style: none;
-  margin: 0.75rem 0 0 0;
-  padding: 0;
-  transition: all 0.3s ease-in-out;
-  @media (min-width: 992px) {
-    position: relative;
-    max-height: 100%;
-    z-index: 2;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-  }
-`;
-
-export const FooterMenuNavigationTitle = styled.h3`
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.3;
-  color: var(--color-2);
-`;
-
-export const FooterMenuNavigationUlLi = styled.li`
-  &:not(:last-child) {
-    margin-bottom: 0.9375rem;
-  }
-`;
-
-export const FooterMenuNavigationUlLiA = styled(Link)`
-  line-height: 1.2;
-  font-size: 0.75rem;
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--color-3);
-  font-weight: 400;
-  &:hover {
-    text-decoration: underline;
-  }
-  @media (min-width: 992px) {
-    font-size: 0.75rem;
-  }
-`;
-
-export const FooterLogos = styled.div`
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: auto auto auto;
-  gap: 30px 0;
-  @media (min-width: 992px) {
-    grid-template-rows: min-content min-content;
-    margin: auto;
-  }
-`;
-
-export const Logo = styled(Link)`
-  margin: 0 auto;
-  cursor: pointer;
-
-  svg {
-        width: 70px;
-        height: 70px;
+    @media (width >= 48rem /* 768px */) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+`;
 
-  @media (min-width: 992px) {
-    margin: auto;
+export const BrandContainer = styled.div`
+    font-size: 1.2rem;
+
+    @media (width >= 48rem /* 768px */) {
+        grid-column: span 1 / span 1;
+    }
+`;
+
+export const Brand = styled.div`
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+`;
+
+export const LogoContainer = styled.div`
+    background-color: var(--primary);
+    border-radius: 28px;
+    width: 28px;
+    height: 28px;
+
     svg {
-        width: 90px;
-        height: 90px;
+        width: 28px;
+        height: 28px;
     }
-  }
 `;
 
-export const FooterSocials = styled.ul`
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  column-gap: 1.5rem;
-  li {
+export const SocialMediaContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+`;
+
+export const SocialMediaBtn = styled.button`
+    background: var(--muted); 
+    color: var(--muted-foreground);
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    width: 2rem;
-    height: 2rem;
-    transition: all 0.3s ease-in-out;
-    background-color: var(--color-14);
-    border-radius: 50%;
-  }
-  li:first-child,
-  li:last-child {
-    margin-left: 0;
-  }
-  li .icon {
+    border: none;
+`;
+
+export const NavLinksTitle = styled.h4`
+    color: var(--muted-foreground);
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    margin-top: 0px;
+`;
+
+export const NavLinks = styled.ul`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    color: #fff;
-  }
-  @media (min-width: 992px) {
-    display: flex;
-  }
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 1rem;
+
+    .link {
+        color: var(--secondary-foreground);
+        font-size: 14px;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--primary-foreground);
+        }
+    }
 `;
 
 export const Copyright = styled.div`
-  grid-area: copy;
-  p {
-    font-size: 0.75rem;
-    color: var(--color-7);
-    text-align: center;
-    font-weight: 700;
-  }
-  ul {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0.5rem 0 0;
-    padding: 0;
-    list-style: none;
-    list-style-position: inside;
-  }
-  ul li {
-    position: relative;
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    line-height: 1.2;
-    padding: 0.5rem;
-    &:not(:first-child) {
-      &::before {
-        content: " • ";
-        display: inline-block;
-        color: var(--color-7);
-        font-size: 2.5rem;
-        line-height: 1;
-        margin-right: 0.5rem;
-      }
+    justify-content: space-between;
+    gap: .5rem;
+    font-size: 12px;
+    line-height: 1.3;
+    border-top: 1px solid var(--border);
+    color: var(--muted-foreground);
+
+    @media (width >= 768px) {
+        flex-direction: row;
     }
-  }
-  ul li a {
-    font-size: 0.75rem;
-    color: rgba(var(--color-7), 1);
-    text-decoration: none;
-  }
-  @media (min-width: 992px) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    p {
-      text-align: left;
-      margin-right: 1rem;
-    }
-    ul {
-      margin: 0;
-    }
-    ul li {
-      padding: 0.5rem;
-      position: relative;
-    }
-  }
 `;

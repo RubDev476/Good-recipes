@@ -7,7 +7,6 @@ export const HeaderContainer = styled.header`
     background-color: var(--card);
     border-bottom: solid 1px var(--border); 
     z-index: 900;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     font-size: 1rem;
 
     /*CREATE A REUSABLE COMPONENT LATER*/
@@ -48,7 +47,7 @@ export const Nav = styled.nav`
     max-width: 1280px;
     margin: auto;
     box-sizing: border-box;
-    padding: .7rem 1rem;
+    padding: .7rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -56,13 +55,9 @@ export const Nav = styled.nav`
     .name-site {
         display: none;
         color: var(--foreground);
-        font-weight: 800;
+        font-weight: 600;
         font-size: 1.2rem;
         margin-left: 10px;
-    }
-    
-    @media screen and (min-width: 940px) {
-        //padding: .4rem 1rem;
     }
 
     @media screen and (min-width: 720px) {
