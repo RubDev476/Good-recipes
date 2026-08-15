@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import type { CardRecipeProps } from '../../../types/props'
 
-export const CardRecipe: React.FC<CardRecipeProps> = ({ title, img, tag, id }) => {
+export const CardRecipe: React.FC<CardRecipeProps> = ({ title, img, tag, id, country }) => {
     return (
         <article>
             <Link
@@ -18,7 +18,8 @@ export const CardRecipe: React.FC<CardRecipeProps> = ({ title, img, tag, id }) =
                     <S.RecipeImgContainer>
                         <img src={img} alt={title} className="recipe-image" />
                         <S.GradientOverlay />
-                        <S.RecipeTime>{30} min</S.RecipeTime>
+                        {/*<S.RecipeTime>{30} min</S.RecipeTime>*/}
+                        {tag === 'meals' && <S.RecipeTime>{country}</S.RecipeTime>}
                     </S.RecipeImgContainer>
 
                     <S.RecipeTypeContainer>

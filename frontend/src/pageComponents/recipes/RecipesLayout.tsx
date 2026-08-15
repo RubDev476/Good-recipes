@@ -11,11 +11,12 @@ export default function RecipesLayout({tag, recipes}: SectionSliderProps) {
                     const id = recipe.idMeal ?? recipe.idDrink;
                     const title = recipe.strMeal ?? recipe.strDrink;
                     const img = recipe.strMealThumb ?? recipe.strDrinkThumb;
+                    const country = recipe.strCountry;
 
                     if (!id || !title || !img) return null;
 
                     return (
-                        <CardRecipe key={id} tag={tag} img={img} title={title} id={id} />
+                        <CardRecipe key={id} tag={tag} img={img} title={title} id={id} country={country} />
                     )
                 })}
             </RecipesContainer>

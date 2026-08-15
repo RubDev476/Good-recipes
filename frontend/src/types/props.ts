@@ -12,7 +12,8 @@ export type SectionSliderProps = Pick<SliderProps, 'recipes' | 'tag'> & {title: 
 export type CardRecipeProps = Pick<SectionSliderProps, 'tag'> & {
     img: string;
     id: string;
-    title: string
+    title: string;
+    country?: string;
 }
 
 export type ViewMoreSectionProps = Pick<SectionSliderProps, 'tag'> & {

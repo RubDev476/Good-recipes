@@ -35,6 +35,7 @@ export interface ApiCategory {
     strDrink?: string;
     strMealThumb?: string;
     strDrinkThumb?: string;
+    strCountry?: string;
 }
 
 export type ApiCategories = z.infer<typeof ApiCategoriesSchema>;
