@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
+//import { useEffect, useState, useCallback } from "react";
 
-import type { ApiCategory } from "../../../types/api-types";
-import type { SliderFeatures } from "../../../types/global";
+//import type { ApiCategory } from "../../../types/api-types";
+//import type { SliderFeatures } from "../../../types/global";
 
 import { 
     ContentContainer,
@@ -10,13 +10,13 @@ import {
     Welcome
 } from "./mainContent.styles";
 
-import Slider from "../slider/Slider";
-import Spinner from "../../../components/ui/spinner/Spinner";
+//import Slider from "../slider/Slider";
+//import Spinner from "../../../components/ui/spinner/Spinner";
 
-import useSliderFeatures from "../../../hooks/useSliderFeatures";
+//import useSliderFeatures from "../../../hooks/useSliderFeatures";
 import { Link } from "react-router";
 
-const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
+/*const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
     "morning": [
         {
             strMeal: "Bread omelette",
@@ -143,7 +143,7 @@ const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
             idDrink: "15330"
         }
     ]
-}
+}*/
 
 export default function MainContent() {
     const hour = new Date().getHours();
