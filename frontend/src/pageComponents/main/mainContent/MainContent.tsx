@@ -1,20 +1,15 @@
-//import { useEffect, useState, useCallback } from "react";
-
-//import type { ApiCategory } from "../../../types/api-types";
-//import type { SliderFeatures } from "../../../types/global";
+import { Link } from "react-router";
 
 import { 
     ContentContainer,
+    DivBackground,
     Greeting,
+    ImgContainer,
     LinksContainer,
+    MainContainer,
+    TextWelcome,
     Welcome
 } from "./mainContent.styles";
-
-//import Slider from "../slider/Slider";
-//import Spinner from "../../../components/ui/spinner/Spinner";
-
-//import useSliderFeatures from "../../../hooks/useSliderFeatures";
-import { Link } from "react-router";
 
 /*const MAIN_RECIPES: { [hour: string]: ApiCategory[] } = {
     "morning": [
@@ -151,38 +146,16 @@ export default function MainContent() {
 
     return (
         <main>
-            <div
-                style={{
-                    position: 'relative',
-                    overflow: 'hidden',
-                    background: 'linear-gradient(135deg, #1a0e10 0%, #0d0c0b 50%, #0e1015 100%)'
-                }}
-            >
-                <div
-                    style={{
-                        position: 'absolute',
-                        opacity: '20%',
-                        inset: '0px'
-                    }}
-                >
+            <MainContainer>
+                <ImgContainer>
                     <img
                         src="https://images.unsplash.com/photo-1505498753650-ac9cb50b158d?w=1600&h=500&fit=crop&auto=format"
                         alt="Hero"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover'
-                        }}
+                        className="img-background"
                     />
-                </div>
+                </ImgContainer>
 
-                <div
-                    style={{
-                        background: 'linear-gradient(to bottom, rgba(13,12,11,0.3) 0%, rgba(13,12,11,0.95) 100%)',
-                        position: 'absolute',
-                        inset: '0px'
-                    }}
-                />
+                <DivBackground />
 
                 <ContentContainer>
                     <Greeting>
@@ -194,17 +167,9 @@ export default function MainContent() {
                         <span style={{ color: 'var(--primary)' }}>Good Recipes</span>
                     </Welcome>
 
-                    <p
-                        style={{ 
-                            color: 'var(--secondary-foreground)',
-                            fontSize: '18px',
-                            lineHeight: '1.5',
-                            maxWidth: '448px',
-                            //margin: '0px'
-                        }}
-                    >
+                    <TextWelcome>
                         Thousands of recipes crafted for every moment — from quick breakfasts to weekend feasts.
-                    </p>
+                    </TextWelcome>
 
                     <LinksContainer>
                         <Link to={'/meals'} className="link-2">
@@ -216,7 +181,7 @@ export default function MainContent() {
                         </Link>
                     </LinksContainer>
                 </ContentContainer>
-            </div>
+            </MainContainer>
         </main>
     )
 }

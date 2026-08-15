@@ -1,8 +1,33 @@
 import styled from "styled-components";
 
+export const MainContainer = styled.div`
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a0e10 0%, #0d0c0b 50%, #0e1015 100%);
+`;
+
+export const ImgContainer = styled.div`
+    position: absolute;
+    opacity: 20%;
+    inset: 0px;
+
+    .img-background {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`;
+
+export const DivBackground = styled.div`
+    background: linear-gradient(to bottom, rgba(13,12,11,0.3) 0%, rgba(13,12,11,0.95) 100%);
+    position: absolute;
+    inset: 0px;
+`;
+
 export const ContentContainer = styled.div`
     position: relative;
     max-width: 1280px;
+    box-sizing: border-box;
     margin-inline: auto;
     padding-inline: 1.5rem;
     padding-block: 5rem;
@@ -21,7 +46,6 @@ export const Greeting = styled.p`
     margin-bottom: 12px;
     color: var(--primary);
     padding: 0px;
-    //margin: 0px;
 `;
 
 export const Welcome = styled.h1`
@@ -34,6 +58,13 @@ export const Welcome = styled.h1`
     @media (width >= 48rem /* 768px */) {
         font-size: 4.5rem /* 4.5rem = 72px */;
     }
+`;
+
+export const TextWelcome = styled.p`
+    color: var(--secondary-foreground);
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 448px;
 `;
 
 export const LinksContainer = styled.div`
@@ -68,7 +99,6 @@ export const LinksContainer = styled.div`
         font-size: .875em;
         line-height: 1.4;
         border-radius: calc(infinity * 1px);
-        //margin-left: 8px;
 
         &:hover {
             opacity: 90%;
