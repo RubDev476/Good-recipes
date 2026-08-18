@@ -17,7 +17,6 @@
     --color-13: #ed7d42;
     --color-14: #471f05;
     --color-15: #db3229;
-    --swiper-theme-color: var(--color-1);
 
 
     /*NEW variables*/
@@ -38,6 +37,9 @@
     --radius: 0.75rem;
     --font-fraunces: 'Fraunces', serif;
     --font-outfit: 'Outfit', sans-serif;
+
+    --swiper-theme-color: var(--primary);
+    --swiper-pagination-bullet-inactive-color: var(--card-foreground);
 }
 
 html {
@@ -66,18 +68,10 @@ body {
 
 .container {
     width: 100%;
-    /*max-width: 74.375rem;*/
     max-width: 1280px;
     margin: auto;
     box-sizing: border-box;
-    /*padding: 0 1rem;*/
     padding: .7rem 1.5rem;
-}
-
-.slider-title {
-    margin: 0 0 14px 0;
-    font-size: calc(1.1rem + 1vw);
-    color: var(--color-2);
 }
 
 .all-center {
@@ -195,8 +189,3 @@ body {
         }
 }
 
-@media screen and (min-width: 1280px) {
-    .container {
-        /*padding: 0;*/
-    }
-}

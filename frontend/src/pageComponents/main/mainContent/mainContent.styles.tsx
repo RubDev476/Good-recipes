@@ -74,7 +74,7 @@ export const LinksContainer = styled.div`
     margin-top: 2rem;
 
     .link-1 {
-        transition: all .3s ease-in-out;
+        transition: all .125s ease-in-out;
         color: var(--foreground);
         text-decoration: none;
         border: solid 1px var(--border);
@@ -90,7 +90,7 @@ export const LinksContainer = styled.div`
     }
     
     .link-2 {
-        transition: all .3s ease-in-out;
+        transition: all .125s ease-in-out;
         background-color: var(--primary);
         color: var(--primary-foreground);
         text-decoration: none;
@@ -102,6 +102,14 @@ export const LinksContainer = styled.div`
 
         &:hover {
             opacity: 90%;
+        }
+
+        &:active {
+            --tw-scale-x: 95%;
+            --tw-scale-y: 95%;
+            --tw-scale-z: 95%;
+
+            scale: var(--tw-scale-x) var(--tw-scale-y);
         }
     }
 `;

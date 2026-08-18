@@ -26,7 +26,7 @@ export default function Slider({recipes, tag, sliderFeatures}: SliderProps) {
                     
                     return (
                         <SwiperSlide key={id}>
-                            <CardRecipe tag={tag} title={title} img={img} id={id} />
+                            <CardRecipe tag={tag} title={title} img={img} id={id} country={recipe.strCountry} />
                         </SwiperSlide>
                     )
                 })}

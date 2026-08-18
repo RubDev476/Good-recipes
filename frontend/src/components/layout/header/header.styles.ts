@@ -12,13 +12,13 @@ export const HeaderContainer = styled.header`
     /*CREATE A REUSABLE COMPONENT LATER*/
     .link-1 {
         border-radius: 50px;
-        transition: all .3s ease-in-out;
         color: var(--foreground);
         text-decoration: none;
         border: solid 1px var(--border);
         padding: 8px 16px;
         font-weight: 600;
         font-size: .9em;
+        transition: all .125s ease-in-out;
         
         &:hover {
             background-color: var(--border);
@@ -27,7 +27,6 @@ export const HeaderContainer = styled.header`
     
     .link-2 {
         border-radius: 50px;
-        transition: all .3s ease-in-out;
         background-color: var(--primary);
         color: var(--primary-foreground);
         text-decoration: none;
@@ -35,6 +34,7 @@ export const HeaderContainer = styled.header`
         font-weight: 600;
         font-size: .9em;
         margin-left: 8px;
+        transition: all .125s ease-in-out;
 
         &:hover {
             opacity: 90%;

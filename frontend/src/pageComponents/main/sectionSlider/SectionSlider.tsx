@@ -15,7 +15,7 @@ export default function SectionSlider({tag, recipes, title}: SectionSliderProps)
     return (
         <Section>
             <div className="container">
-                <h2 className="slider-title">{title}</h2>
+                <h2 className="slider-title font-display">{title}</h2>
             </div>
 
             <Slider recipes={recipes} tag={tag} sliderFeatures={features} />
