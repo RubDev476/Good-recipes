@@ -113,7 +113,7 @@ function SocialIcon({ name }: { name: string }) {
     }
 
     return (
-        <SocialMediaBtn>
+        <SocialMediaBtn name={name}>
             {icons[name]}
         </SocialMediaBtn>
     )
