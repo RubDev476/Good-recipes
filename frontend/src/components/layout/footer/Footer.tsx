@@ -113,7 +113,7 @@ function SocialIcon({ name }: { name: string }) {
     }
 
     return (
-        <SocialMediaBtn id={name}>
+        <SocialMediaBtn id={name} aria-label={name}>
             {icons[name]}
         </SocialMediaBtn>
     )
