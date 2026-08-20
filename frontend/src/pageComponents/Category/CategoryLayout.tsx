@@ -1,6 +1,7 @@
 import React from 'react'
 import * as S from './CategoryLayout.styles'
 import type { ApiCategories } from '../../types/api-types'
+import Banner from '../../components/ui/banner/Banner'
 
 interface Props {
     title: string
@@ -11,16 +12,7 @@ interface Props {
 export const CategoryLayout: React.FC<Props> = ({ title, cards, bannerImg }) => {
     return (
         <>
-            <S.BannerSection>
-                <S.BannerImgCont>
-                    <img src={bannerImg} className='img' alt="Category banner" />
-                </S.BannerImgCont>
-                <S.BannerGradient />
-                <S.BannerTitleCont>
-                    <p>Browse</p>
-                    <h1 className='font-display'>{title}</h1>
-                </S.BannerTitleCont>
-            </S.BannerSection>
+            <Banner title={title} img={bannerImg} tag='categories' />
 
             <S.CategoriesSection>
                 <S.CategoriesCont>
