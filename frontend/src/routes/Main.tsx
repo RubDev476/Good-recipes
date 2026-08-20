@@ -264,6 +264,8 @@ const CATEGORIES_SECTIONS: {[x: string]: ViewMoreSectionProps} = {
 export default function Main() {
     const hour = new Date().getHours();
     const time = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
+
+    window.scrollTo(0, 0);
     
     return (
         <>

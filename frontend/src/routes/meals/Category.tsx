@@ -15,6 +15,8 @@ export default function CategoryMeals() {
 
     const location = useLocation();
 
+    window.scrollTo(0, 0);
+
     useEffect(() => {
         const fetchCategory = async () => {
             const category = location.pathname.split('/')[3];

@@ -15,6 +15,8 @@ export default function CategoryCocktails() {
 
     const location = useLocation();
 
+    window.scrollTo(0, 0);
+
     useEffect(() => {
         const fetchCategorie = async () => {
             const category = location.pathname.split('/')[3].replace('_', '/');

@@ -12,6 +12,8 @@ export default function RecipeMeal() {
 
     const location = useLocation();
 
+    window.scrollTo(0, 0);
+
     useEffect(() => {
         const fetchRecipe = async () => {
             const id = location.pathname.split('/')[3]; //52772

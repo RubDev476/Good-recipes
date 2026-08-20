@@ -11,6 +11,8 @@ export default function RecipeCocktail() {
     const [loading, setLoading] = useState(true);
 
     const location = useLocation();
+
+    window.scrollTo(0, 0);
     
     useEffect(() => {
         const fetchRecipe = async () => {
