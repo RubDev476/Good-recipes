@@ -10,6 +10,6 @@ export default function Meals() {
            return <p>Error : {error}</p>
        }
 
-    return <CategoryLayout title="Meals"  cards={categories}  />
+    return <CategoryLayout title="Meals"  cards={categories} bannerImg="/images/banner-m.avif"  />
     
 }

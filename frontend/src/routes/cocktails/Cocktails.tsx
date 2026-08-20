@@ -10,6 +10,6 @@ export default function Cocktails() {
         return <p>Error : {error}</p>
     }
 
-    return <CategoryLayout title="Cocktails" cards={categories} />
+    return <CategoryLayout title="Cocktails" cards={categories} bannerImg="/images/banner-c.avif" />
 
 }
