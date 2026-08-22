@@ -6,7 +6,7 @@ import type { ApiMealCategory } from "../../types/api-types";
 
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
 import Loader from "../../components/ui/Loader.tsx";
-import { Heading } from "../../pageComponents/recipes/recipesLayout.ts";
+import Banner from "../../components/ui/banner/Banner.tsx";
 
 export default function CategoryMeals() {
     const [recipes, setRecipes] = useState<ApiMealCategory[]>([]);
@@ -14,6 +14,8 @@ export default function CategoryMeals() {
     const [nameCategory, setCategory] = useState('');
 
     const location = useLocation();
+
+    window.scrollTo(0, 0);
 
     useEffect(() => {
         const fetchCategory = async () => {
@@ -38,11 +40,7 @@ export default function CategoryMeals() {
 
     return (
         <>
-            <Heading>
-                <img src="/images/category-recipes.webp" alt="top-image" className={'w-full'} />
-
-                <h1>{nameCategory}</h1>
-            </Heading>
+            <Banner title={nameCategory} img="/images/banner-m.avif" tag="category" />
 
             {!loading ? (
                 <RecipesLayout recipes={recipes} tag={'meals'} title="" />

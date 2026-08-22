@@ -12,15 +12,17 @@ export const Heading = styled.div`
 export const RecipesContainer = styled.div`
     display: grid;
     align-items: flex-start;
-    gap: 40px;
+    //gap: 40px;
     margin: 40px auto;
-    
-    @media screen and (min-width: 480px) {
+    grid-template-columns: 1fr;
+    //gap: 30px;
+    gap: calc(0.25rem * 6);
+
+    @media screen and (width >= 520px) {
         grid-template-columns: 1fr 1fr;
-        gap: 30px;
     }
 
-    @media screen and (min-width: 940px) {
+    @media screen and (width >= 720px) {
         grid-template-columns: 1fr 1fr 1fr;
     }
 `;
