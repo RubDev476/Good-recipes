@@ -23,4 +23,5 @@ export type ViewMoreSectionProps = Pick<SectionSliderProps, 'tag'> & {
 
 export type RecipeProps = {
     recipe: ApiRecipe;
+    tag: TagRecipe;
 }

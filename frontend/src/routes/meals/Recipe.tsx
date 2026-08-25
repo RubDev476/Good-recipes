@@ -32,13 +32,13 @@ export default function RecipeMeal() {
         }
 
         fetchRecipe();
-    }, [])
+    }, [location])
 
     if(loading) return <Loader />;
 
     if(recipe) return (
         <>
-            <RecipeComponent recipe={recipe} />
+            <RecipeComponent recipe={recipe} tag="meals" />
         </>
     )
 }

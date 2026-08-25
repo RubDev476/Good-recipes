@@ -1,18 +1,47 @@
-import {Link} from "react-router";
 import {
-    RecipeContainer,
-    RecipeMain,
-    RecipeSidebar,
-    RecipeFooter as RecipeFooterComponent,
+    BgCont,
+    ChekedAmount,
+    HeroBackCategoriesBtn,
+    HeroCont,
+    HeroImg,
+    HeroImgGradient,
+    HeroInfoCont,
+    HeroRecipeTitle,
+    HeroTag,
+    HeroTagsCategoryBtn,
+    HeroTagsCont,
+    IngredientLi,
+    IngredientUl,
+    InstructionNumber,
+    InstructionsCont,
+    InstructionStep,
+    ListIngredientsHeading,
+    RecipeCont,
+    RecipeGridCont,
+    RecipeIngredientsCont,
+    RecipeInstructionsCont,
+    RecipeMainCont,
+    SidebarCont,
+    SidebarHeading,
+    SidebarImg,
+    SidebarImgCont,
+    SidebarLink,
+    SidebarStickyCont,
 } from "../../../components/ui/recipe/recipe.styles";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faStar,
-} from "@fortawesome/free-solid-svg-icons";
 
 import type {RecipeProps} from "../../../types/props.ts";
+import { useState } from "react";
 
-export const RecipeComponent = ({recipe}: RecipeProps) => {
+const relatedRecipes = [
+    {id: 53076, title: 'Bread omelette', img: 'https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg', tag: 'meals'},
+    {id: 178336, title: 'Blueberry Mojito', img: 'https://www.thecocktaildb.com/images/media/drink/07iep51598719977.jpg', tag: 'cocktails'},
+    {id: 12768, title: 'Frappé', img: 'https://www.thecocktaildb.com/images/media/drink/vqwryq1441245927.jpg', tag: 'cocktails'},
+    {id: 52813, title: 'Kentucky Fried Chicken', img: 'https://www.themealdb.com/images/media/meals/xqusqy1487348868.jpg', tag: 'meals'},
+];
+
+export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
+    const [checked, setChecked] = useState<Set<number>>(new Set());
+
     const handleIngredients = () => {
         const ingredients: string[] = [];
         
@@ -27,158 +56,149 @@ export const RecipeComponent = ({recipe}: RecipeProps) => {
         
         return ingredients;
     }
+
+    const splitInstructions = (steps: string): string[] => {
+        return steps
+            .split(".")
+            .map(step => step.trim())
+            .filter(step => step.length > 0);
+    }
+
+    const toggleIngredient = (i: number) => {
+        setChecked(prev => {
+            const next = new Set(prev)
+            next.has(i) ? next.delete(i) : next.add(i)
+            return next
+        })
+    }
     
     return (
-        <RecipeContainer>
-            <RecipeMain>
-                <div className="recipe__image">
-                    {recipe.strMealThumb && <img src={recipe.strMealThumb} alt={"recipe-image"}/>}
-                    {recipe.strDrinkThumb && <img src={recipe.strDrinkThumb} alt={"recipe-image"}/>}
-                </div>
-                
-                {recipe.strMeal && <RecipeTexts title={recipe.strMeal}/>}
-                {recipe.strDrink && <RecipeTexts title={recipe.strDrink}/>}
-                
-                <RecipeIngredients ingredients={handleIngredients()} />
-                
-                <RecipeSteps steps={recipe.strInstructions as string} />
-            </RecipeMain>
-            
-            <RecipeSidebar>
-                <RecipeAside/>
-            </RecipeSidebar>
-            
-            <RecipeFooterComponent>
-                <RecipeFooter/>
-            </RecipeFooterComponent>
-        </RecipeContainer>
-    );
-};
+        <BgCont>
+            <HeroCont>
+                {recipe.strMealThumb && <HeroImg src={recipe.strMealThumb} alt={"recipe-image"}/>}
+                {recipe.strDrinkThumb && <HeroImg src={recipe.strDrinkThumb} alt={"recipe-image"}/>}
 
-const RecipeTexts = ({title}: {title: string}) => {
-    return (
-        <div className="recipe__texts">
-            <h1 className="hl-1">{title}</h1>
-        </div>
-    );
-};
+                <HeroImgGradient />
 
-const RecipeIngredients = ({ingredients}: {ingredients: string[]}) => {
-    return (
-        <div className="ingredients">
-            <h2 className="ingredients__title">Ingredients</h2>
+                <HeroInfoCont>
+                    <HeroBackCategoriesBtn
+                        to={`/${tag}`}
+                    >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        Back to categories
+                    </HeroBackCategoriesBtn>
 
-            <ul>
-                {ingredients.map((ingredient, index) => (
-                    <li key={index}>
-                        <div className="cook__item">
-                            <input type="checkbox" name="checkDone" id={`ingredient-${index}`}/>
-                            <label htmlFor={`ingredient-${index}`} className="checkDone">
-                                <span>{ingredient}</span>
-                            </label>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
+                    <HeroTagsCont>
+                        <HeroTagsCategoryBtn
+                            to={`/${tag}/category/${recipe.strCategory?.replace('/', '_')}`}
+                        >
+                            {recipe.strCategory}
+                        </HeroTagsCategoryBtn>
 
-const RecipeSteps = ({steps}: {steps: string}) => {
-    return (
-        <div className="ingredients ingredient__steps">
-            <h2 className="ingredients__title">¡to Cook!</h2>
-            
-            <p>{steps}</p>
-        </div>
-    );
-};
+                        <HeroTag>
+                            {tag === 'meals' ? (
+                                <>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
+                                    </svg>
+                                </>
+                            ) : (
+                                <>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8M12 11v11M3 3l9 8 9-8M5 3h14"></path></svg>
+                                </>
+                            )}
 
-const RecipeAside = () => {
-    return (
-        <>
-            <div className="recipe__section__header">
-                <h2>Recipes that may interest you</h2>
-            </div>
-            
-            <div className="recipe__section__content">
-                <div className="recipe__section__list">
-                    {Array(4)
-                    .fill(null)
-                    .map((_, idx) => (
-                        <Link to="#" className="card__recipe" key={idx}>
-                            <div className="card__recipe__image">
-                                <img
-                                    src="https://www.recetasnestle.com.mx/sites/default/files/styles/cropped_recipe_card_new/public/srh_recipes/c638d17edfbb63a5310471a3b6b75b90.jpg.webp?itok=3Fdu7-dw"
-                                    alt="recipe_1"
-                                />
-                            </div>
-                            
-                            <ul className="card__recipe__information">
-                                <li className="info__difficulty">Fácil</li>
-                                <li className="info__time">37 min</li>
-                            </ul>
-                            
-                            <h3 className="card__recipe__title">
-                                Tacos de camarón al pastor
-                            </h3>
-                        </Link>
-                    ))}
-                </div>
-            </div>
-        </>
-    );
-};
+                            {tag}
+                        </HeroTag>
 
-const RecipeFooter = () => {
-    return (
-        <>
-            <h2 className="recipe__comments__title">Commentaries (1)</h2>
-            
-            <div className="recipe__comments__login">
-                <h2 className="recipe__comments__login__description">
-                    Who did you spoil with this delicious recipe? Tell us how it turned out for you.
-                </h2>
-                
-                <div className="recipe__comments__login__actions">
-                    <Link to="/login" className="btn btn-primary">
-                        Login
-                    </Link>
-                    <Link to="/register" className="btn btn-secondary">
-                        Register
-                    </Link>
-                </div>
-                
-                <div className="recipe__comments__comment__container">
-                    <div className="recipe__comments__comment">
-                        <div className="text">
-                            <div className="name">Fabi</div>
-                            <div className="time">06.06.2023</div>
-                            
-                            <div className="stars">
-                                {Array(5)
-                                .fill(null)
-                                .map((_, idx) => (
-                                    <FontAwesomeIcon
-                                        icon={faStar}
-                                        style={{
-                                            fontSize: "0.50rem",
-                                            color: "var(--color-9)",
-                                            marginRight: "2px",
-                                        }}
-                                        key={idx}
-                                    />
+                        {recipe.strCountry && (
+                            <HeroTag>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                                </svg>
+
+                                {recipe.strCountry}
+                            </HeroTag>
+                        )}
+                    </HeroTagsCont>
+
+                    <HeroRecipeTitle className="font-display">{recipe.strMeal ?? recipe.strDrink}</HeroRecipeTitle>
+                </HeroInfoCont>
+            </HeroCont>
+
+            <RecipeCont>
+                <RecipeGridCont>
+                    <RecipeMainCont>
+                        <RecipeIngredientsCont>
+                            <ListIngredientsHeading>
+                                <h2 className="font-display">Ingredients</h2>
+
+                                {checked.size > 0 && <ChekedAmount>{checked.size} / {handleIngredients().length} Checked</ChekedAmount>}
+                            </ListIngredientsHeading>
+
+                            <IngredientUl>
+                                {handleIngredients().map((ingredient, index) => (
+                                    <IngredientLi
+                                        key={index}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            name="checkDone"
+                                            id={`ingredient-${index}`}
+                                        />
+                                        <label 
+                                            htmlFor={`ingredient-${index}`} 
+                                            className="checkDone"
+                                            onClick={() => toggleIngredient(index)}
+                                            style={{ color: checked.has(index) ? 'var(--muted-foreground)' : 'var(--foreground)', textDecoration: checked.has(index) ? 'line-through' : 'none' }}
+                                        >
+                                            <span>{ingredient}</span>
+                                        </label>
+                                    </IngredientLi>
+                                ))}
+                            </IngredientUl>
+                        </RecipeIngredientsCont>
+
+                        <RecipeInstructionsCont>
+                            <h2 className="font-display">How to Cook</h2>
+
+                            <div>
+                                {splitInstructions(recipe.strInstructions as string).map((step, index) => (
+                                    <InstructionsCont key={index}>
+                                        <InstructionNumber className="font-display">{index + 1}</InstructionNumber>
+                                        <InstructionStep>{step}</InstructionStep>
+                                    </InstructionsCont>
                                 ))}
                             </div>
-                        </div>
-                        <div className="content">
-                            <p>
-                                Very good, its delicious!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
+                        </RecipeInstructionsCont>
+                    </RecipeMainCont>
+
+                    <SidebarCont>
+                        <SidebarStickyCont>
+                            <SidebarHeading>
+                                <h3 className="font-display">Recipes that may interest you</h3>
+                            </SidebarHeading>
+
+                            <div>
+                                {relatedRecipes.map((recipe) => (
+                                    <SidebarLink
+                                        key={recipe.id}
+                                        to={`/${recipe.tag}/recipe/${recipe.id}`}
+                                    >
+                                        <SidebarImgCont>
+                                            <SidebarImg src={recipe.img} alt={recipe.title} />
+                                        </SidebarImgCont>
+
+                                        <p>{recipe.title}</p>
+                                    </SidebarLink>
+                                ))}
+                            </div>
+                        </SidebarStickyCont>
+                    </SidebarCont>
+                </RecipeGridCont>
+            </RecipeCont>
+        </BgCont>
     );
 };

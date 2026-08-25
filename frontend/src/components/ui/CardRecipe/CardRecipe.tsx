@@ -33,7 +33,7 @@ export const CardRecipe: React.FC<CardRecipeProps> = ({ title, img, tag, id, cou
                                     </>
                                 ) : (
                                     <>
-                                        <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8M12 11v11M3 3l9 8 9-8M5 3h14"></path></svg>
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8M12 11v11M3 3l9 8 9-8M5 3h14"></path></svg>
                                     </>
                                 )}
                             </S.RecipeIconContainer>

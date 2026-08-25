@@ -1,407 +1,317 @@
 import styled from "styled-components";
+import { Link } from "react-router";
 
-export const RecipeContainer = styled.div`
-    *:after,
-    *:before {
-        box-sizing: border-box;
-    }
+//============================== redisign
+export const BgCont = styled.div`
+    background: var(--background);
+`;
 
-    display: block;
-    max-width: 100%;
-    margin: 40px auto 0;
-    padding: 0 1rem;
-    background-color: transparent;
+//#region hero
+export const HeroCont = styled.div`
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 68vh;
+    min-height: 380px;
+    max-height: 568px;
+    //box-sizing: border-box;
+`;
 
-    @media (min-width: 992px) {
-        max-width: 74.375rem;
-        display: grid;
-        grid-template-columns: calc(67% - 5rem) minmax(33%, 24.375rem);
-        grid-template-rows: auto auto;
-        gap: 0 5rem;
-        grid-auto-flow: row;
-        justify-content: space-between;
-        grid-template-areas:
-      "top top"
-      "main aside"
-      "footer aside";
+export const HeroImg = styled.img`
+    width: 100%;
+    height: 100%;
+    //object-fit: cover; //the images are very small
+    object-fit: contain;
+`;
+
+export const HeroImgGradient = styled.div`
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13,12,11,1) 0%, rgba(13,12,11,0.4) 50%, transparent 100%);
+`;
+
+export const HeroInfoCont = styled.div`
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    max-width: 1280px;
+    box-sizing: border-box;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-bottom: 2.5rem;
+`;
+
+export const HeroBackCategoriesBtn = styled(Link)`
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: var(--muted-foreground);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.2s;
+
+    &:hover {
+        color: var(--foreground);
     }
 `;
 
-export const RecipeMain = styled.main`
+export const HeroTagsCont = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+`;
 
-    .recipe__image {
-        position: relative;
-        *margin: auto;
-        max-width: 400px;
+export const HeroTagsCategoryBtn = styled(Link)`
+    background: var(--primary);
+    color: var(--foreground);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    padding-inline: 0.75rem;
+    padding-block: 0.25rem;
+    border-radius: calc(infinity * 1px);
+`;
 
-        img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
+export const HeroTag = styled.span`
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.7);
+    text-transform: capitalize;
+`;
+
+export const HeroRecipeTitle =  styled.h1`
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0;
+
+    @media (width >= 48rem /* 768px */) {
+        font-size: 3rem /*= 48px */;
     }
+`;
 
-    .recipe__texts .description p {
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--color-3);
-        display: inline;
+//#region recipe ingredients
+export const RecipeCont = styled.div`
+    max-width: 1280px;
+    box-sizing: border-box;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-block: 3rem;
+`;
+
+export const RecipeGridCont = styled.div`
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 3rem;
+
+    @media (width >= 64rem /* 1024px */) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+`;
+
+export const RecipeMainCont = styled.main`
+    @media (width >= 64rem /* 1024px */) {
+        grid-column: span 2 / span 2;
+    }
+`;
+
+export const RecipeIngredientsCont = styled.section`
+    margin-bottom: 3.5rem;
+`;
+
+export const ListIngredientsHeading = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin: 0;
+    }
+`;
+
+export const ChekedAmount = styled.span`
+    font-size: 0.75rem;
+    padding-inline: 0.75rem;
+    padding-block: 0.25rem;
+    border-radius: calc(infinity * 1px);
+    background: var(--muted); 
+    color: var(--muted-foreground);
+`;
+
+export const IngredientUl = styled.ul`
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+`;
+
+export const IngredientLi = styled.li`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    justify-content: space-between;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    margin-bottom: 0.25rem;
     
-    
-    .ingredients__title {
-        font-size: 1.375rem;
-        font-weight: 800;
-        margin-bottom: 0.75rem;
-        color: var(--color-2);
-    }
-    
-    .ingredients ul {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 1.5rem;
-        width: 100%;
-    }
-
-    .ingredients ul li {
-        padding-bottom: 0.5rem;
-        margin-bottom: 0.75rem;
-        border-bottom: 1px solid var(--color-8);
-        position: relative;
-    }
-
-    [type="checkbox"],
-    [type="radio"] {
-        box-sizing: border-box;
-        padding: 0;
-    }
-
-    .ingredients ul li input[name="checkDone"] {
+    input[name="checkDone"] {
         display: none;
     }
 
-    .ingredients ul li label[class="checkDone"] {
-        position: relative;
-        cursor: pointer;
+    label[class="checkDone"] {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         font-size: 0.875rem;
-        color: var(--color-3);
+        width: 100%;
+        padding-block: 0.75rem;
+        padding-inline: 0.25rem;
     }
 
-    .ingredients ul li label[class="checkDone"] {
-        position: relative;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        font-size: 0.875rem;
-        color: var(--color-3);
-    }
-
-    .ingredients ul li label[class="checkDone"]::before {
+    label[class="checkDone"]::after {
         content: "";
         display: block;
         background-color: transparent;
-        border: 2px solid var(--color-1);
-        padding: 7px;
+        border: 2px solid var(--muted);
         position: relative;
         cursor: pointer;
         border-radius: 0.25rem;
-        margin-right: 0.75rem;
-        height: 1.125rem;
-        width: 1.125rem;
+        height: 1.25rem;
+        width: 1.25rem;
+        box-sizing: border-box;
     }
 
-    .ingredients
-    ul
-    li
     input[name="checkDone"]:checked
-    + label[class="checkDone"]::before {
-        background-color: var(--color-1);
-        background-image: url(https://www.recetasnestle.com.mx/themes/custom/cookit/Content/img/svgs/check-v3-white.svg?v=4098);
+    + label[class="checkDone"]::after {
+        background-image: url('/images/check-icon.svg');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center;
-    }
-
-    .ingredient__steps .ingredients__title {
-        margin-top: 0;
-    }
-
-    @media (min-width: 992px) {
-        grid-area: main;
-
-        .ingredients__title {
-            width: 100%;
-            font-size: 2rem;
-        }
-        
-        .ingredient__steps .cook__item__title {
-            font-size: 1.375rem;
-        }
+        border: 2px solid var(--primary);
+        background-color: var(--primary);
     }
 `;
 
-export const RecipeSidebar = styled.aside`
-    .recipe__section__header {
-        margin-bottom: 1rem;
+//#region recipe instructions
+export const RecipeInstructionsCont = styled.section`
+    margin-bottom: 3.5rem;
 
-        h2 {
-            font-size: 1.375rem;
-            font-weight: 800;
-            color: var(--color-2);
-            margin: 0;
-        }
-    }
-
-    .recipe__section__content {
-        .recipe__section__list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-    }
-
-    .recipe__section__content .card__recipe {
-        display: block;
-        position: relative;
-        width: 100%;
-        text-decoration: none;
-    }
-
-    .recipe__section__content .card__recipe .card__recipe__image {
-        position: relative;
-        margin-bottom: 0.75rem;
-        border-radius: 0.75rem;
-        overflow: hidden;
-
-        img {
-            border-radius: 0.75rem;
-            width: 100%;
-            height: 10.6875rem;
-            object-fit: cover;
-            object-position: center;
-            margin-bottom: 0;
-        }
-    }
-
-    .recipe__section__content .card__recipe .card__recipe__title {
-        height: auto;
-        font-size: 14px;
-        line-height: 1.2;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        text-overflow: ellipsis;
-        white-space: normal;
-        color: var(--color-3);
-        font-weight: 700;
-        margin-bottom: 0;
-    }
-
-    .recipe__section__content .card__recipe .card__recipe__information {
-        list-style: none;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0;
-        position: absolute;
-        top: calc(10.6875rem - 1.3rem);
-        gap: 0;
-        margin: 0;
-
-        .info__difficulty,
-        .info__time {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--color-7);
-        }
-    }
-
-    .recipe__section__content .card__recipe .card__recipe__information li {
-        padding: 0 1rem;
-    }
-
-    @media (min-width: 992px) {
-        grid-area: aside;
-
-        .recipe__section__header {
-            h2 {
-                font-size: 1.75rem;
-            }
-        }
-
-        .recipe__section__content {
-            .recipe__section__list {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-        }
-
-        .recipe__section__content .card__recipe:not(:last-of-type) {
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--color-6);
-        }
-
-        .recipe__section__content .card__recipe {
-            display: grid;
-            grid-template-columns: 5.625rem calc(100% - 6.125rem);
-            grid-template-rows: 5.625rem;
-            gap: 0 0.5rem;
-            padding-bottom: 1rem;
-        }
-
-        .recipe__section__content .card__recipe .card__recipe__image {
-            margin-bottom: 0;
-
-            img {
-                height: 5.625rem;
-                width: 5.625rem;
-            }
-        }
-
-        .recipe__section__content .card__recipe .card__recipe__title {
-            right: 0;
-            top: 12rem;
-            height: calc(2 * 1.2em);
-            font-size: 18px;
-            line-height: 1.2;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            text-overflow: ellipsis;
-            white-space: normal;
-        }
-
-        .recipe__section__content .card__recipe .card__recipe__information {
-            font-size: 0.875rem;
-            color: #757575;
-            padding: 0;
-            top: initial;
-            right: 0;
-            bottom: calc(1.75rem);
-            width: calc(100% - 6.125rem);
-        }
-
-        .recipe__section__content .card__recipe .card__recipe__information li {
-            padding: 0;
-        }
-    }
-`;
-
-export const RecipeFooter = styled.section`
-    margin-bottom: 3rem;
-
-    .recipe__comments__title {
-        font-weight: bold;
+    h2 {
         font-size: 1.5rem;
-        color: var(--color-2);
-        margin-bottom: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin: 0 0 1.5rem 0;
+    }
+`;
+
+export const InstructionsCont = styled.div`
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+`;
+
+export const InstructionNumber = styled.div`
+    width: 2rem;
+    height: 2rem;
+    border-radius: calc(infinity * 1px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-top: 0.125rem;
+    background: var(--muted);
+    color: var(--primary);
+`;
+
+export const InstructionStep = styled.p`
+    font-size: 0.875rem;
+    line-height: 1.625;
+    flex: 1;
+    padding-top: 0.25rem;
+    margin: 0;
+    color: var(--secondary-foreground);
+`;
+
+//#region aside
+export const SidebarCont = styled.aside`
+    @media (width >= 64rem /* 1024px */) {
+        grid-column: span 1 / span 1;
+    }
+`; 
+
+export const SidebarStickyCont = styled.div`
+    position: sticky;
+    top: 6rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--border);
+`;
+
+export const SidebarHeading = styled.div`
+    padding: 1.25rem;
+    border-bottom: solid 1px;
+    border-color: var(--border);
+
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--foreground);
+    }
+`;
+
+export const SidebarLink = styled(Link)`
+    width: 100%;
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem;
+    text-align: left;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.2s;
+    text-decoration: none;
+    color: var(--foreground);
+    border-color: var(--border);
+
+    &:hover {
+        background-color: color-mix(in oklab, var(--foreground) /* #fff = #ffffff */ 3%, transparent);
     }
 
-    .recipe__comments__login {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2.5rem;
+    &:not(:last-child) {
+        border-bottom: 1px solid var(--foreground);
     }
+`;
 
-    .recipe__comments__login__description {
-        font-size: 1rem;
-        font-weight: 800;
-        text-align: center;
-    }
+export const SidebarImgCont = styled.div`
+    width: 4rem;
+    height: 3.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-sizing: border-box;
+`;
 
-    .recipe__comments__login__actions {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 1rem;
-        column-gap: 1rem;
-    }
-
-    .recipe__comments__login__actions .btn {
-        display: inline-flex;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        padding: 0 1.25rem;
-        width: auto;
-        font-size: 1rem;
-        height: 2.5rem;
-        transition: all 0.3s ease-in-out;
-        border-radius: 50px;
-        line-height: 1;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .recipe__comments__login__actions .btn-primary {
-        color: var(--color-1);
-        background: transparent;
-        border: 1px solid var(--color-1);
-    }
-
-    .recipe__comments__login__actions .btn-secondary {
-        color: var(--color-5);
-        background: var(--color-1);
-        border: 1px solid var(--color-1);
-    }
-
-    .recipe__comments__comment__container {
-        width: 100%;
-    }
-
-    .recipe__comments__comment {
-        padding: 1.5rem 0 0;
-        margin-bottom: 1.5rem;
-        display: flex;
-        width: 100%;
-        align-items: center;
-    }
-
-    .recipe__comments__comment .text {
-        width: 5rem;
-        flex: 0 0 5rem;
-    }
-
-    .recipe__comments__comment .text .name {
-        font-size: 1rem;
-        font-weight: 800;
-        margin-bottom: 0.25rem;
-        overflow: hidden;
-    }
-
-    .recipe__comments__comment .text .time {
-        font-size: 0.75rem;
-        margin-bottom: 0.375rem;
-        color: var(--color-7);
-    }
-
-    .recipe__comments__comment .text .stars {
-        display: flex;
-    }
-
-    .recipe__comments__comment .content {
-        padding: 0 0 0 1rem;
-    }
-
-    .recipe__comments__comment .content p {
-        font-size: 0.875rem;
-    }
-
-    @media (min-width: 992px) {
-        grid-area: footer;
-
-        .recipe__comments__login__description {
-            font-size: 1.375rem;
-        }
-    }
+export const SidebarImg = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;
