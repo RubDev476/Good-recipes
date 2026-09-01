@@ -3,10 +3,10 @@ Sitio web de catalogo de recetas para comidas, postres, desayunos y cockteles.
 
 ![App Screenshot](/hero.png)
 
-## Demo
+## 🚀 Demo
 https://good-recipes-vert.vercel.app/
 
-## Mockups
+## 🎨 Mockups y Diseño
 https://www.figma.com/design/YWFxZZFUbPjIjLUyxVzRxR/Good-Recipes?node-id=21-471&t=BkMhg2LAN4KhqdYw-1
 
 ## 🛠️ Stack
