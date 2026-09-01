@@ -26,4 +26,23 @@ https://www.figma.com/design/YWFxZZFUbPjIjLUyxVzRxR/Good-Recipes?node-id=21-471&
 - ✅ Validaciones con **Zod**.  
 - 🎨 Estilos con **Styled Components**.  
 - 📱 Diseño responsivo y moderno.  
-- 📱 Mockups con Figma.  
+- 📱 Mockups con Figma.
+
+## 🚀 Instalación y uso
+*No se requieren variables de entorno, las apis son públicas.
+
+Clonar repositorio:
+
+```bash
+  git clone https://github.com/RubDev476/Good-recipes.git
+```
+Instala las dependencias:
+
+```bash
+  npm run i
+```
+Ejecutar de forma local (http://localhost:5173/):
+
+```bash
+  npm run dev
+```
