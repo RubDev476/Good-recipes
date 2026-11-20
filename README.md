@@ -2,7 +2,25 @@
 
 Aplicación web moderna de catálogo de recetas culinarias y coctelería. Permite explorar desayunos, comidas, postres, cafés y cócteles con recomendaciones adaptadas a la hora del día, navegación por categorías y vistas interactivas paso a paso.
 
-![Good Recipes Preview](/hero.png)
+> [!NOTE]
+> **Proyecto optimizado y modernizado con IA Antigravity:** Los tests unitarios y de integracion de este proyecto fueron creados, refactorizados y actualizados con la asistencia de la IA agéntica **Antigravity** (Google DeepMind).
+
+---
+
+## 📌 Tabla de Contenidos
+
+- [Enlaces Rápidos](#-enlaces-rápidos)
+- [Características Principales](#-características-principales)
+- [Stack Tecnológico](#-stack-tecnológico)
+- [Rutas de la Aplicación](#-rutas-de-la-aplicación)
+- [Estructura del Proyecto (Frontend)](#-estructura-del-proyecto-frontend)
+- [APIs Utilizadas](#-apis-utilizadas)
+- [Instalación y Uso Local](#-instalación-y-uso-local)
+- [Scripts Disponibles](#-scripts-disponibles)
+- [Testing (Pruebas Unitarias y de Integración)](#-testing-pruebas-unitarias-y-de-integración)
+  - [Arquitectura de Pruebas](#arquitectura-de-pruebas)
+  - [Cómo ejecutar las pruebas](#cómo-ejecutar-las-pruebas)
+- [Despliegue](#-despliegue)
 
 ---
 
@@ -29,7 +47,7 @@ Aplicación web moderna de catálogo de recetas culinarias y coctelería. Permit
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠 Stack Tecnológico
 
 | Categoría | Tecnologías |
 | :--- | :--- |
@@ -37,6 +55,7 @@ Aplicación web moderna de catálogo de recetas culinarias y coctelería. Permit
 | **Enrutamiento** | React Router 8 (`createBrowserRouter`) |
 | **Estilos e UI** | Styled Components 6, CSS Custom Properties, Swiper 14, FontAwesome |
 | **Tipado y Validación** | TypeScript, Zod 4 |
+| **Testing** | Vitest, React Testing Library, Jest-DOM, JSDOM |
 | **Calidad de Código** | ESLint 10, `typescript-eslint` |
 | **Diseño** | Figma |
 | **APIs Públicas** | [TheMealDB](https://www.themealdb.com/), [TheCocktailDB](https://www.thecocktaildb.com/) |
@@ -44,7 +63,7 @@ Aplicación web moderna de catálogo de recetas culinarias y coctelería. Permit
 
 ---
 
-## 🗺️ Rutas de la Aplicación
+## 🗺 Rutas de la Aplicación
 
 | Ruta | Descripción |
 | :--- | :--- |
@@ -97,9 +116,23 @@ frontend/
 │   │   └── props.ts            # Interfaces de props de componentes
 │   ├── createRoutes.tsx        # Configuración centralizada de React Router
 │   └── main.tsx                # Punto de entrada de React
+├── test/
+│   ├── setup.ts                # Configuración global de pruebas, matchers y mocks base (Swiper, scrollTo)
+│   ├── unit/                   # Pruebas unitarias replicando la estructura exacta de src/
+│   │   ├── api/                # Tests de consumo de API (api-actions.test.ts)
+│   │   ├── components/         # Tests de componentes de layout y UI
+│   │   ├── hooks/              # Tests de hooks personalizados (useSliderFeatures.test.ts)
+│   │   ├── pageComponents/     # Tests de secciones y layouts de páginas
+│   │   └── routes/             # Tests unitarios de vistas y hooks de rutas
+│   └── integration/            # Pruebas de integración de flujos completos de usuario
+│       ├── AppNavigation.test.tsx
+│       ├── AuthFlow.test.tsx
+│       ├── CocktailsFlow.test.tsx
+│       └── MealsFlow.test.tsx
 ├── index.html                  # Plantilla HTML con metadatos SEO y Open Graph
 ├── vercel.json                 # Configuración de rewrites para SPA en Vercel
 ├── vite.config.ts              # Configuración de Vite
+├── vitest.config.ts            # Configuración del entorno de pruebas con Vitest y JSDOM
 └── package.json                # Dependencias y scripts del frontend
 ```
 
@@ -167,10 +200,52 @@ Ejecutar dentro de `frontend/`:
 | `npm run build` | Verifica tipos con TypeScript (`tsc -b`) y genera el build de producción en `dist/`. |
 | `npm run preview` | Levanta un servidor local para previsualizar el build de producción. |
 | `npm run lint` | Ejecuta ESLint para analizar la calidad y consistencia del código. |
+| `npm test` | Inicia Vitest en modo interactivo (*watch mode*) durante el desarrollo. |
+| `npm run test:run` | Ejecuta una sola vez toda la suite de pruebas unitarias y de integración. |
 
 ---
 
-## ☁️ Despliegue
+## 🧪 Testing (Pruebas Unitarias y de Integración)
+
+El proyecto cuenta con una suite de **34 archivos de prueba (69 tests en total)** construida con **Vitest**, **React Testing Library** y **JSDOM**. Todas las pruebas están escritas en inglés y documentadas con comentarios explicativos en español para facilitar el mantenimiento.
+
+### Arquitectura de Pruebas
+
+1. **Configuración Global (`frontend/test/setup.ts` y `frontend/vitest.config.ts`)**:
+   - Extiende `expect` con los matchers semánticos de `@testing-library/jest-dom`.
+   - Limpia el árbol del DOM (`cleanup`) y reinicia los espías/mocks después de cada prueba.
+   - Simula APIs del navegador no implementadas en `jsdom` (como `window.scrollTo`) y componentes de `Swiper` para validar sus propiedades sin errores de layout.
+
+2. **Pruebas Unitarias (`frontend/test/unit/`)**:
+   - Siguen **exactamente la misma jerarquía de carpetas que `frontend/src/`** (`api/`, `components/`, `hooks/`, `pageComponents/`, `routes/`).
+   - Evalúan cada módulo de forma aislada:
+     - **Capa de API (`api-actions`)**: Peticiones a TheMealDB y TheCocktailDB, y retorno de categorías estáticas para cócteles.
+     - **Custom Hooks (`useSliderFeatures`, `useFetchCategories`)**: Cálculo responsivo de columnas del slider ante eventos `resize` y manejo de estados de éxito/error en peticiones asíncronas.
+     - **Componentes UI y Layout**: Renderizado accesible de `Header`, `Footer`, `Banner`, `CardRecipe`, `InputField`, `Loader`, `Spinner`, `Logo` y la vista interactiva `RecipeComponent` (checklist de ingredientes con contador `X / N Checked` y separación de pasos de cocción).
+     - **Vistas y Page Components**: Comportamiento dependiente de la hora del día (`Good Morning`, `Good Afternoon`, `Good Evening`) mediante *fake timers*, sanitización de rutas y estados de carga.
+
+3. **Pruebas de Integración (`frontend/test/integration/`)**:
+   - Prueban flujos completos de usuario conectando el enrutador en memoria (`createMemoryRouter`) con múltiples componentes, hooks y la capa de datos:
+     - **`AppNavigation.test.tsx`**: Navegación global entre páginas desde el `Header`, resaltado de ruta activa (`current-path-color`) y manejo de rutas inexistentes (`Not Found`).
+     - **`MealsFlow.test.tsx`**: Flujo completo desde el catálogo de categorías de comidas (`/meals`) -> selección de categoría (`/meals/category/:category`) -> detalle de receta (`/meals/recipe/:IdRecipe`) -> interacción con la lista de ingredientes.
+     - **`CocktailsFlow.test.tsx`**: Flujo completo de coctelería, incluyendo la codificación y decodificación de categorías con `/` en la URL (ej. `Coffee / Tea` <-> `Coffee _ Tea`) hasta la vista de preparación de la bebida.
+     - **`AuthFlow.test.tsx`**: Transición bidireccional entre las vistas de `/login` y `/register` desde la barra de navegación y los selectores del formulario.
+
+### Cómo ejecutar las pruebas
+
+```bash
+cd frontend
+
+# Ejecutar todas las pruebas una sola vez
+npm run test:run
+
+# Ejecutar Vitest en modo watch
+npm test
+```
+
+---
+
+## ☁ Despliegue
 
 El frontend está configurado para desplegarse en **Vercel** con soporte para navegación SPA mediante `frontend/vercel.json`, el cual redirige todas las rutas (`/(.*)`) hacia `/` para evitar errores 404 al recargar rutas dinámicas.
 
