@@ -1,3 +1,14 @@
+/**
+ * Prueba de integración: Flujo completo de descubrimiento y visualización de comidas (`MealsFlow.test.tsx`).
+ *
+ * Qué se prueba:
+ * - La interacción real entre `Meals` -> `useFetchCategories` -> `api-actions` -> `CategoryLayout` ->
+ *   `CategoryMeals` -> `RecipesLayout` -> `CardRecipe` -> `RecipeMeals` -> `RecipeComponent`.
+ * - Solo se intercepta `window.fetch` en la frontera de red para simular las 3 respuestas de TheMealDB:
+ *   1. Listado de categorías (`/meals`)
+ *   2. Listado de platillos de la categoría seleccionada (`/meals/category/Chicken`)
+ *   3. Detalle completo de la receta seleccionada (`/meals/recipe/52772`) y marcado interactivo de ingredientes.
+ */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -16,7 +27,7 @@ describe('Integration: Meals Discovery & Recipe Flow', () => {
     });
 
     it('should allow a user to browse meal categories, select a category, view a recipe, and check ingredients', async () => {
-        // 1. Mock getCategories response for /meals
+        // 1. Respuesta simulada de getCategories para /meals
         fetchMock.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValueOnce({
                 categories: [
@@ -30,7 +41,7 @@ describe('Integration: Meals Discovery & Recipe Flow', () => {
             }),
         });
 
-        // 2. Mock getRecipes response for /meals/category/Chicken
+        // 2. Respuesta simulada de getRecipes para /meals/category/Chicken
         fetchMock.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValueOnce({
                 meals: [
@@ -43,7 +54,7 @@ describe('Integration: Meals Discovery & Recipe Flow', () => {
             }),
         });
 
-        // 3. Mock getRecipe response for /meals/recipe/52772
+        // 3. Respuesta simulada de getRecipe para /meals/recipe/52772
         fetchMock.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValueOnce({
                 meals: [
@@ -80,24 +91,24 @@ describe('Integration: Meals Discovery & Recipe Flow', () => {
 
         render(<RouterProvider router={router} />);
 
-        // Step 1: Categories page renders "Chicken"
+        // Paso 1: Se cargan y muestran las categorías de comidas
         await waitFor(() => {
             expect(screen.getByText('Chicken')).toBeInTheDocument();
         });
 
-        // Click on the Chicken category card
+        // El usuario hace clic en la categoría "Chicken"
         fireEvent.click(screen.getByRole('link', { name: /Chicken/i }));
 
-        // Step 2: Category page renders "Teriyaki Chicken Casserole"
+        // Paso 2: Se carga la vista de la categoría y aparece la tarjeta "Teriyaki Chicken Casserole"
         await waitFor(() => {
             expect(screen.getByText('Teriyaki Chicken Casserole')).toBeInTheDocument();
         });
         expect(screen.getByRole('heading', { name: 'Chicken' })).toBeInTheDocument();
 
-        // Click on the recipe card
+        // El usuario hace clic en la tarjeta de la receta
         fireEvent.click(screen.getByRole('link', { name: /Teriyaki Chicken Casserole/i }));
 
-        // Step 3: Recipe detail page renders ingredients and instructions
+        // Paso 3: Se carga el detalle completo de la receta con ingredientes y pasos de preparación
         await waitFor(() => {
             expect(screen.getByRole('heading', { name: 'How to Cook' })).toBeInTheDocument();
         });
@@ -110,7 +121,7 @@ describe('Integration: Meals Discovery & Recipe Flow', () => {
         expect(screen.getByText('Preheat oven to 350 degrees')).toBeInTheDocument();
         expect(screen.getByText('Bake for 30 minutes')).toBeInTheDocument();
 
-        // Step 4: Interact with ingredient checklist
+        // Paso 4: El usuario marca un ingrediente como completado
         fireEvent.click(screen.getByText('Soy Sauce - 3/4 cup'));
         expect(screen.getByText('1 / 2 Checked')).toBeInTheDocument();
     });

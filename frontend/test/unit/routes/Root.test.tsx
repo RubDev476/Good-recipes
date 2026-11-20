@@ -1,3 +1,10 @@
+/**
+ * Pruebas unitarias para el layout raíz `Root` (`src/routes/Root.tsx`).
+ *
+ * Qué se prueba:
+ * - Que estructure la aplicación renderizando permanentemente el `Header` arriba,
+ *   el contenido de la ruta hija activa mediante `<Outlet />` en el centro, y el `Footer` abajo.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router';

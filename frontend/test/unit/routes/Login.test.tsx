@@ -1,3 +1,9 @@
+/**
+ * Pruebas unitarias para la ruta `Login` (`src/routes/Login.tsx`).
+ *
+ * Qué se prueba:
+ * - Que monte el componente `Auth` configurado con `mode="login"`.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

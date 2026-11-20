@@ -1,3 +1,13 @@
+/**
+ * Prueba de integración: Navegación global y enrutamiento de la aplicación (`AppNavigation.test.tsx`).
+ *
+ * Qué se prueba:
+ * - Integración completa entre el router (`createMemoryRouter`), el layout `Root` (`Header` + `Outlet` + `Footer`)
+ *   y las páginas principales (`Main`, `Meals`, `Cocktails`).
+ * - Navegación del usuario haciendo clic en los enlaces del `Header`, verificando que cambie el contenido
+ *   de la página y que se actualice la clase CSS activa (`current-path-color`) en la barra de navegación.
+ * - Manejo de rutas inexistentes mostrando el `errorElement` ("Not Found").
+ */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -8,6 +18,7 @@ import Register from '../../src/routes/Register';
 import { Meals, CategoryMeals, RecipeMeals } from '../../src/routes/meals';
 import { Cocktails, CategoryCocktails, RecipeCocktail } from '../../src/routes/cocktails';
 
+// Réplica de la tabla de rutas de `src/createRoutes.tsx` usando createMemoryRouter para pruebas de integración.
 const routesConfig = [
     {
         path: '/',
@@ -58,9 +69,11 @@ describe('Integration: App Navigation & Routing', () => {
         expect(screen.getByText(/Welcome to/i)).toBeInTheDocument();
         expect(screen.getByText('©2026 Created by RubDeveloper')).toBeInTheDocument();
 
+        // Acotamos la búsqueda al `<header>` (role="banner") para no confundir los enlaces del menú
+        // con los enlaces de las tarjetas de recetas que también contienen la palabra "meals".
         const header = screen.getByRole('banner');
 
-        // Navigate to Meals via Header
+        // 1. Navegar a Meals desde el Header
         const mealsNavLink = within(header).getByRole('link', { name: /Meals/i, hidden: true });
         fireEvent.click(mealsNavLink);
 
@@ -69,7 +82,7 @@ describe('Integration: App Navigation & Routing', () => {
         });
         expect(mealsNavLink).toHaveClass('current-path-color');
 
-        // Navigate to Cocktails via Header
+        // 2. Navegar a Cocktails desde el Header
         const cocktailsNavLink = within(header).getByRole('link', {
             name: /Cocktails/i,
             hidden: true,

@@ -1,3 +1,15 @@
+/**
+ * Pruebas unitarias para el componente `RecipesLayout` (`src/pageComponents/recipes/RecipesLayout.tsx`).
+ *
+ * Qué se prueba:
+ * - Que renderice una tarjeta `<CardRecipe />` (`<article>`) por cada receta válida en la grilla.
+ * - Que omita recetas con campos obligatorios faltantes (`id`, `title` o `img`).
+ *
+ * Nota técnica sobre la importación `.tsx`:
+ * En `src/pageComponents/recipes/` coexisten `recipesLayout.ts` (estilos) y `RecipesLayout.tsx` (componente).
+ * En sistemas de archivos Windows (case-insensitive), se especifica `.tsx` explícitamente para evitar que
+ * el resolutor importe el archivo `.ts` de estilos por prioridad de extensión.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -37,7 +49,7 @@ describe('RecipesLayout', () => {
             {
                 idDrink: '11007',
                 strDrink: 'Margarita',
-                // Missing strDrinkThumb
+                // Sin imagen (strDrinkThumb) -> debe omitirse
             },
             {
                 idDrink: '178336',

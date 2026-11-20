@@ -1,8 +1,19 @@
+/**
+ * Pruebas unitarias para el custom hook `useSliderFeatures` (`src/hooks/useSliderFeatures.ts`).
+ *
+ * Qué se prueba:
+ * - Que el número de slides visibles (`slidesView`) se calcule correctamente según el ancho de `window.innerWidth`:
+ *   - Menor a 480px -> 1 slide
+ *   - Entre 480px y 939px -> 2 slides
+ *   - 940px o más -> 3 slides
+ * - Que el listener del evento `resize` en `window` actualice el estado reactivamente cuando cambia el tamaño de pantalla.
+ */
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import useSliderFeatures from '../../../src/hooks/useSliderFeatures';
 
 describe('useSliderFeatures', () => {
+    // Función auxiliar para modificar `window.innerWidth` en el entorno simulado de jsdom.
     const setWindowWidth = (width: number) => {
         Object.defineProperty(window, 'innerWidth', {
             writable: true,
@@ -57,6 +68,7 @@ describe('useSliderFeatures', () => {
 
         expect(result.current.features?.slidesView).toBe(3);
 
+        // `act` envuelve eventos que provocan actualizaciones de estado en React.
         act(() => {
             setWindowWidth(400);
             window.dispatchEvent(new Event('resize'));

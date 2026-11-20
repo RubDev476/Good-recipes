@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para la ruta `RecipeCocktail` (`src/routes/cocktails/Recipe.tsx`).
+ *
+ * Qué se prueba:
+ * - Que muestre el `Loader` mientras se obtiene la información del cóctel.
+ * - Que extraiga el ID del cóctel desde la URL (`/cocktails/recipe/11007` -> `11007`).
+ * - Que invoque `getRecipe('cocktails', '11007')` y muestre el componente `RecipeComponent`.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `CardRecipe` (`src/components/ui/CardRecipe/CardRecipe.tsx`).
+ *
+ * Qué se prueba:
+ * - Cuando `tag="meals"`: renderiza título, imagen, etiqueta de país (`country`) y enlace a `/meals/recipe/:id`.
+ * - Cuando `tag="cocktails"`: renderiza título, imagen y enlace a `/cocktails/recipe/:id`,
+ *   asegurando que NO se muestre la etiqueta de país aunque se pase por props.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

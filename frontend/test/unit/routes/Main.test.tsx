@@ -1,3 +1,14 @@
+/**
+ * Pruebas unitarias para la ruta principal `Main` (`src/routes/Main.tsx`).
+ *
+ * Qué se prueba:
+ * - Que ejecute `window.scrollTo(0, 0)` al montar la vista.
+ * - Que seleccione el carrusel de recetas adecuado según la franja horaria:
+ *   - Mañana (< 12h): "Good Morning" con recetas de desayuno (ej. "Bread omelette").
+ *   - Tarde (12h–16h): "Good Afternoon" con comidas principales (ej. "Kentucky Fried Chicken").
+ *   - Noche (≥ 17h): "Good Evening" con cócteles (ej. "Blueberry Mojito").
+ * - Que renderice las secciones fijas: "For coffee lovers", `ViewMoreSection` y `ViewMoreAltSection`.
+ */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

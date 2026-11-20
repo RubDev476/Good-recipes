@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `ViewMoreAltSection` (`src/pageComponents/main/ViewMoreAltSection/ViewMoreAltSection.tsx`).
+ *
+ * Qué se prueba:
+ * - Renderizado de la etiqueta "Drinks & Cocktails", el título principal y la descripción.
+ * - Creación dinámica de enlaces hacia cada categoría recibida en `nameCategories` (`/${tag}/category/${nameCategory}`).
+ * - Enlace general "View more categories" hacia `/${tag}` e imagen ilustrativa de la sección.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

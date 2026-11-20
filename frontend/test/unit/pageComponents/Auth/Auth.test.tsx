@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `Auth` (`src/pageComponents/Auth/Auth.tsx`).
+ *
+ * Qué se prueba:
+ * - Modo `login`: renderiza el encabezado "Welcome back", el botón de Google y oculta el aviso legal de registro.
+ * - Modo `register`: renderiza el encabezado "Create account", el botón de Google y el aviso de "Terms of Service" y "Privacy Policy".
+ * - Botones de cambio de modo (`login` y `register`) con sus rutas `/login` y `/register`.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

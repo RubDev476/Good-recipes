@@ -1,3 +1,12 @@
+/**
+ * Pruebas unitarias para el componente `Slider` (`src/pageComponents/main/slider/Slider.tsx`).
+ *
+ * Qué se prueba:
+ * - Que las propiedades de configuración (`slidesView`, `pagination`, `navigation`) se pasen correctamente a `Swiper`
+ *   (verificadas mediante los atributos `data-*` definidos en el mock de `setup.ts`).
+ * - Que se renderice un `SwiperSlide` con su `CardRecipe` por cada receta válida.
+ * - Que la validación `if (!id || !title || !img) return null` descarte elementos con datos incompletos.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -48,7 +57,7 @@ describe('Slider', () => {
             {
                 idMeal: '53076',
                 strMeal: 'Bread omelette',
-                // Missing image thumbnail
+                // Falta strMealThumb -> debe ser ignorado por Slider
             },
             {
                 idDrink: '11007',

@@ -1,9 +1,20 @@
+/**
+ * Pruebas unitarias para el componente `Footer` (`src/components/layout/footer/Footer.tsx`).
+ *
+ * Qué se prueba:
+ * - Renderizado del nombre del sitio ("Good Recipes") y su párrafo descriptivo.
+ * - Renderizado de los 5 botones de redes sociales verificando su accesibilidad (`aria-label`).
+ * - Enlaces de navegación de la sección "Site Map" (`Meal Recipes`, `Cocktail Recipes`, `Favourites`).
+ * - Texto de derechos de autor en el pie de página.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { Footer } from '../../../../../src/components/layout/footer/Footer';
 
 describe('Footer', () => {
+    // Se envuelve en MemoryRouter porque Footer utiliza el componente <Link> de react-router.
+    //Envolverlos en <MemoryRouter initialEntries={['/ruta']}> simula la URL actual en memoria sin necesitar un navegador real.
     const renderFooter = () =>
         render(
             <MemoryRouter>

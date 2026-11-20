@@ -1,3 +1,13 @@
+/**
+ * Prueba de integración: Flujo completo de descubrimiento y visualización de cócteles (`CocktailsFlow.test.tsx`).
+ *
+ * Qué se prueba:
+ * - Carga inicial de las categorías estáticas de cócteles en `/cocktails`.
+ * - Navegación hacia una categoría cuyo nombre contiene una barra `/` ("Coffee / Tea"):
+ *   - `CategoryLayout` codifica la URL como `/cocktails/category/Coffee _ Tea`.
+ *   - `CategoryCocktails` revierte el `_` a `/` para consultar correctamente el endpoint de TheCocktailDB.
+ * - Selección de una bebida ("Frappé") y visualización de sus ingredientes e instrucciones en `/cocktails/recipe/12768`.
+ */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
@@ -16,7 +26,8 @@ describe('Integration: Cocktails Discovery & Recipe Flow', () => {
     });
 
     it('should browse static cocktail categories, handle slash-encoded category routes, and display cocktail details', async () => {
-        // 1. Mock getRecipes response for /cocktails/category/Coffee _ Tea
+        // 1. Respuesta simulada de getRecipes para /cocktails/category/Coffee _ Tea
+        // (Nota: getCategories para cócteles no usa fetch porque devuelve el arreglo estático COCKTAILS).
         fetchMock.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValueOnce({
                 drinks: [
@@ -29,7 +40,7 @@ describe('Integration: Cocktails Discovery & Recipe Flow', () => {
             }),
         });
 
-        // 2. Mock getRecipe response for /cocktails/recipe/12768
+        // 2. Respuesta simulada de getRecipe para /cocktails/recipe/12768
         fetchMock.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValueOnce({
                 drinks: [
@@ -63,23 +74,23 @@ describe('Integration: Cocktails Discovery & Recipe Flow', () => {
 
         render(<RouterProvider router={router} />);
 
-        // Step 1: Static cocktail categories are displayed
+        // Paso 1: Se muestran las categorías estáticas de cócteles
         await waitFor(() => {
             expect(screen.getByText('Coffee / Tea')).toBeInTheDocument();
         });
 
-        // Click on "Coffee / Tea" category card
+        // El usuario selecciona la categoría "Coffee / Tea"
         fireEvent.click(screen.getByRole('link', { name: /Coffee \/ Tea/i }));
 
-        // Step 2: CategoryCocktails fetches drinks for "Coffee / Tea" and displays "Frappé"
+        // Paso 2: CategoryCocktails consulta las bebidas de la categoría y muestra "Frappé"
         await waitFor(() => {
             expect(screen.getByText('Frappé')).toBeInTheDocument();
         });
 
-        // Click on the "Frappé" recipe card
+        // El usuario selecciona la tarjeta de "Frappé"
         fireEvent.click(screen.getByRole('link', { name: /Frappé/i }));
 
-        // Step 3: Cocktail recipe details page renders
+        // Paso 3: Se renderiza la página de detalle del cóctel con sus ingredientes y pasos
         await waitFor(() => {
             expect(screen.getByRole('heading', { name: 'Frappé' })).toBeInTheDocument();
         });

@@ -1,3 +1,9 @@
+/**
+ * Pruebas unitarias para el componente `Spinner` (`src/components/ui/spinner/Spinner.tsx`).
+ *
+ * Qué se prueba:
+ * - Que renderice el contenedor estilizado junto con el `<div className="loader">` que anima la carga.
+ */
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import Spinner from '../../../../../src/components/ui/spinner/Spinner';

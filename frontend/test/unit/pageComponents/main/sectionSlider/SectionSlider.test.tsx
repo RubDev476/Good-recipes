@@ -1,3 +1,10 @@
+/**
+ * Pruebas unitarias para el componente `SectionSlider` (`src/pageComponents/main/sectionSlider/SectionSlider.tsx`).
+ *
+ * Qué se prueba:
+ * - Estado de carga: cuando `useSliderFeatures()` aún devuelve `{ features: null }`, debe mostrar el `Spinner`.
+ * - Estado listo: cuando `features` tiene la configuración del carrusel, renderiza el título `<h2>` y el componente `Slider`.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -15,6 +22,7 @@ describe('SectionSlider', () => {
     ];
 
     it('should render Spinner when slider features are not available yet', () => {
+        // Espía el hook `useSliderFeatures` forzando una respuesta nula para simular el estado previo al cálculo de pantalla.
         vi.spyOn(useSliderFeaturesModule, 'default').mockReturnValueOnce({ features: null });
 
         const { container } = render(

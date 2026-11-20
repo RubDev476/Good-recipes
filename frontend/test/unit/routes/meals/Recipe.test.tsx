@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para la ruta `RecipeMeal` (`src/routes/meals/Recipe.tsx`).
+ *
+ * Qué se prueba:
+ * - Que muestre inicialmente el componente `Loader`.
+ * - Que extraiga el ID de la receta de `location.pathname.split('/')[3]` (`/meals/recipe/52772` -> `52772`).
+ * - Que llame a `getRecipe('meals', '52772')` y renderice el detalle con `RecipeComponent`.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `InputField` (`src/components/ui/InputField/InputField.tsx`).
+ *
+ * Qué se prueba:
+ * - Asociación accesible entre `<label>` e `<input>` mediante `htmlFor` e `id`.
+ * - Asignación correcta de atributos (`type`, `name`, `placeholder`) y valor por defecto `autoComplete="off"`.
+ * - Posibilidad de sobrescribir `autoComplete="on"` y propagar eventos adicionales como `onChange`.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { InputField } from '../../../../../src/components/ui/InputField/InputField';

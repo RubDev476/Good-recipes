@@ -1,3 +1,9 @@
+/**
+ * Pruebas unitarias para la ruta `Register` (`src/routes/Register.tsx`).
+ *
+ * Qué se prueba:
+ * - Que monte el componente `Auth` configurado con `mode="register"`.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

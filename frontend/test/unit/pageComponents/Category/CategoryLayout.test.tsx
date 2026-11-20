@@ -1,3 +1,12 @@
+/**
+ * Pruebas unitarias para el componente `CategoryLayout` (`src/pageComponents/Category/CategoryLayout.tsx`).
+ *
+ * Qué se prueba:
+ * - Renderizado del `Banner` principal con el título de la sección ("Meals" o "Cocktails") y el subtítulo "Browse".
+ * - Generación de las tarjetas de categoría y sanitización de barras `/` por guiones bajos `_` en las URLs
+ *   (para evitar que React Router interprete la barra como un segmento adicional de ruta).
+ * - Manejo seguro cuando `cards` es `null` (renderiza solo el Banner sin lanzar errores).
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

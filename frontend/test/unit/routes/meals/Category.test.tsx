@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para la ruta `CategoryMeals` (`src/routes/meals/Category.tsx`).
+ *
+ * Qué se prueba:
+ * - Que muestre el componente `Loader` mientras la petición asíncrona está en curso.
+ * - Que extraiga el nombre de la categoría del cuarto segmento del `pathname` (`/meals/category/Chicken` -> `Chicken`).
+ * - Que consulte `getRecipes` con la URL de filtro de TheMealDB y renderice las tarjetas en `RecipesLayout`.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -26,8 +34,10 @@ describe('CategoryMeals Route', () => {
             </MemoryRouter>
         );
 
+        // Antes de que la promesa se resuelva, debe mostrarse el indicador de carga.
         expect(container.querySelector('.loader')).toBeInTheDocument();
 
+        // Una vez resuelta la promesa, aparece la receta en pantalla.
         await waitFor(() => {
             expect(screen.getByText('Teriyaki Chicken Casserole')).toBeInTheDocument();
         });

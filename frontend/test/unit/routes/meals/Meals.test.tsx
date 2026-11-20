@@ -1,3 +1,10 @@
+/**
+ * Pruebas unitarias para la ruta `Meals` (`src/routes/meals/Meals.tsx`).
+ *
+ * Qué se prueba:
+ * - Que renderice `CategoryLayout` con las categorías de comidas obtenidas por `useFetchCategories`.
+ * - Que muestre el mensaje `<p>Error : {error}</p>` cuando el hook reporta un error en la petición.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
@@ -6,6 +13,7 @@ import * as useFetchCategoriesModule from '../../../../src/routes/hooks/useFetch
 
 describe('Meals Route', () => {
     it('should render CategoryLayout with fetched meal categories', () => {
+        // Simula una respuesta exitosa del hook useFetchCategories.
         vi.spyOn(useFetchCategoriesModule, 'useFetchCategories').mockReturnValueOnce({
             categories: [
                 {
@@ -30,6 +38,7 @@ describe('Meals Route', () => {
     });
 
     it('should display an error message when fetching categories fails', () => {
+        // Simula un estado de error en el hook useFetchCategories.
         vi.spyOn(useFetchCategoriesModule, 'useFetchCategories').mockReturnValueOnce({
             categories: null,
             error: 'Error in fetchCategories',

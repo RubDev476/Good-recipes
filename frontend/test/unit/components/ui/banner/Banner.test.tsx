@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `Banner` (`src/components/ui/banner/Banner.tsx`).
+ *
+ * Qué se prueba:
+ * - Que muestre el título principal (`<h1>`), la imagen con su `src` y el texto "Browse"
+ *   cuando se usa en páginas de listado general (`tag="categories"`).
+ * - Que oculte el subtítulo "Browse" cuando se usa dentro de una categoría específica (`tag="category"`).
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Banner from '../../../../../src/components/ui/banner/Banner';

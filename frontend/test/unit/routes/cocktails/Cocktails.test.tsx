@@ -1,3 +1,10 @@
+/**
+ * Pruebas unitarias para la ruta `Cocktails` (`src/routes/cocktails/Cocktails.tsx`).
+ *
+ * Qué se prueba:
+ * - Que renderice `CategoryLayout` con el título "Cocktails" y las categorías devueltas por `useFetchCategories`.
+ * - Que muestre el mensaje de error si el hook devuelve un fallo.
+ */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';

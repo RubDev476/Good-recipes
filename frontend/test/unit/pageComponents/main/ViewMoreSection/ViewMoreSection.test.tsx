@@ -1,3 +1,11 @@
+/**
+ * Pruebas unitarias para el componente `ViewMoreSection` (`src/pageComponents/main/ViewMoreSection/ViewMoreSection.tsx`).
+ *
+ * Qué se prueba:
+ * - Renderizado del título `<h2>` y subtítulo "Browse by meal category".
+ * - Enlaces individuales para cada categoría proporcionada en `nameCategories`.
+ * - Enlace "View more categories" que redirige a la vista general `/${tag}`.
+ */
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
