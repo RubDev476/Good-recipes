@@ -8,6 +8,7 @@ import { useScrollToTop } from "../../hooks/useScrollToTop";
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
 import Loader from "../../components/ui/Loader.tsx";
 import Banner from "../../components/ui/banner/Banner.tsx";
+import NotFound from "../NotFound.tsx";
 
 export default function CategoryMeals() {
     const [recipes, setRecipes] = useState<ApiMealCategory[]>([]);
@@ -49,6 +50,17 @@ export default function CategoryMeals() {
             isCancelled = true;
         };
     }, [location]);
+
+    if (!loading && recipes.length === 0) {
+        return (
+            <NotFound
+                title="Category not found"
+                message="No meal recipes were found for this category."
+                backTo="/meals"
+                backLabel="Back to meal categories"
+            />
+        );
+    }
 
     return (
         <>

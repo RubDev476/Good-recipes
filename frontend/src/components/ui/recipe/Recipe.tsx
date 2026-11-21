@@ -82,12 +82,13 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
 
     const origin = recipe.strArea ?? recipe.strCountry;
     const instructions = splitInstructions(recipe.strInstructions ?? '');
+    const recipeTitle = recipe.strMeal ?? recipe.strDrink ?? 'Recipe image';
+    const heroImageSrc = recipe.strMealThumb ?? recipe.strDrinkThumb;
     
     return (
         <BgCont>
             <HeroCont>
-                {recipe.strMealThumb && <HeroImg src={recipe.strMealThumb} alt={"recipe-image"}/>}
-                {recipe.strDrinkThumb && <HeroImg src={recipe.strDrinkThumb} alt={"recipe-image"}/>}
+                {heroImageSrc && <HeroImg src={heroImageSrc} alt={recipeTitle} />}
 
                 <HeroImgGradient />
 

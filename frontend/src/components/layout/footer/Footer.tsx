@@ -76,7 +76,7 @@ export const Footer = () => {
                 </GridContainer>
 
                 <Copyright>
-                    <span>©2026 Created by RubDeveloper</span>
+                    <span>©{new Date().getFullYear()} Created by RubDeveloper</span>
                 </Copyright>
             </Container>
         </StyledFooter>
@@ -113,7 +113,7 @@ function SocialIcon({ name }: { name: string }) {
     }
 
     return (
-        <SocialMediaBtn id={name} aria-label={name}>
+        <SocialMediaBtn type="button" id={name} aria-label={name}>
             {icons[name]}
         </SocialMediaBtn>
     )

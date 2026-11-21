@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 import { getRecipe } from "../../api/api-actions";
 import type { ApiRecipe } from "../../types/api-types";
 import { RecipeComponent } from "../../components/ui/recipe/Recipe";
 import Loader from "../../components/ui/Loader";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
+import NotFound from "../NotFound";
 
 export default function RecipeMeal() {
     const [recipe, setRecipe] = useState<ApiRecipe | null>(null);
@@ -50,10 +51,12 @@ export default function RecipeMeal() {
 
     if (!recipe) {
         return (
-            <div className="container all-center" style={{ minHeight: '60vh', flexDirection: 'column', gap: '1rem', textAlign: 'center' }}>
-                <h2 className="font-display">Recipe not found</h2>
-                <Link to="/meals" style={{ color: 'var(--primary)', fontWeight: 600 }}>Back to meal categories</Link>
-            </div>
+            <NotFound
+                title="Recipe not found"
+                message="We couldn't find the meal recipe you're looking for."
+                backTo="/meals"
+                backLabel="Back to meal categories"
+            />
         );
     }
 

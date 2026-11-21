@@ -46,7 +46,7 @@ describe('RecipeComponent', () => {
             screen.getByRole('heading', { name: 'Teriyaki Chicken Casserole' })
         ).toBeInTheDocument();
 
-        const heroImg = screen.getByRole('img', { name: 'recipe-image' });
+        const heroImg = screen.getByRole('img', { name: 'Teriyaki Chicken Casserole' });
         expect(heroImg).toHaveAttribute('src', 'https://example.com/teriyaki.jpg');
 
         const backLink = screen.getByRole('link', { name: /Back to categories/i });

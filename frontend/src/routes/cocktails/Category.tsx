@@ -8,6 +8,7 @@ import { useScrollToTop } from "../../hooks/useScrollToTop";
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
 import Loader from "../../components/ui/Loader.tsx";
 import Banner from "../../components/ui/banner/Banner.tsx";
+import NotFound from "../NotFound.tsx";
 
 export default function CategoryCocktails() {
     const [recipes, setRecipes] = useState<ApiDrinkCategory[]>([]);
@@ -50,6 +51,17 @@ export default function CategoryCocktails() {
             isCancelled = true;
         };
     }, [location]);
+
+    if (!loading && recipes.length === 0) {
+        return (
+            <NotFound
+                title="Category not found"
+                message="No cocktail recipes were found for this category."
+                backTo="/cocktails"
+                backLabel="Back to cocktail categories"
+            />
+        );
+    }
 
     return (
         <>
