@@ -1,6 +1,6 @@
 import {
     BgCont,
-    ChekedAmount,
+    CheckedAmount,
     HeroBackCategoriesBtn,
     HeroCont,
     HeroImg,
@@ -31,6 +31,7 @@ import {
 
 import type {RecipeProps} from "../../../types/props.ts";
 import { useState } from "react";
+import { CocktailIcon, MealIcon } from "../CategoryIcons";
 
 const relatedRecipes = [
     {id: 53076, title: 'Bread omelette', img: 'https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg', tag: 'meals'},
@@ -111,15 +112,9 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
 
                         <HeroTag>
                             {tag === 'meals' ? (
-                                <>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
-                                    </svg>
-                                </>
+                                <MealIcon size={12} stroke="white" />
                             ) : (
-                                <>
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8 22h8M12 11v11M3 3l9 8 9-8M5 3h14"></path></svg>
-                                </>
+                                <CocktailIcon size={12} stroke="white" />
                             )}
 
                             {tag}
@@ -147,7 +142,7 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
                             <ListIngredientsHeading>
                                 <h2 className="font-display">Ingredients</h2>
 
-                                {checked.size > 0 && <ChekedAmount>{checked.size} / {ingredients.length} Checked</ChekedAmount>}
+                                {checked.size > 0 && <CheckedAmount>{checked.size} / {ingredients.length} Checked</CheckedAmount>}
                             </ListIngredientsHeading>
 
                             <IngredientUl>

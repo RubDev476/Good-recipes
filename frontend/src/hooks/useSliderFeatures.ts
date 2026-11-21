@@ -9,9 +9,6 @@ const sliderResize = (): SliderFeatures => {
         features.slidesView = 1;
     } else if (width < 940) {
         features.slidesView = 2;
-    } else if (width >= 1280) {
-        features.pagination = true;
-        //features.navigation = true;
     }
 
     return features;

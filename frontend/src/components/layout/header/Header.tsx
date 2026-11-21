@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router";
 
 import Logo from "../../ui/Logo.tsx";
+import { CocktailIcon, MealIcon } from "../../ui/CategoryIcons";
 
 import {HeaderContainer, LogoContainer, Nav, Routes} from "./header.styles.ts";
 
@@ -25,12 +26,12 @@ export const Header = () => {
                 </div>
 
                 <Routes>
-                    <Link to={'/meals'} className={`link all-center ${pathname.includes("meals") ? "current-path-color" : ""}`}><svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
-                    </svg> Meals</Link>
-                    <Link to={'/cocktails'} className={`link all-center ${pathname.includes("cocktails") ? "current-path-color" : ""}`}><svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M8 22h8M12 11v11M3 3l9 8 9-8M5 3h14" />
-                    </svg> Cocktails</Link>
+                    <Link to={'/meals'} className={`link all-center ${pathname.includes("meals") ? "current-path-color" : ""}`}>
+                        <MealIcon className="icon" strokeWidth={2} /> Meals
+                    </Link>
+                    <Link to={'/cocktails'} className={`link all-center ${pathname.includes("cocktails") ? "current-path-color" : ""}`}>
+                        <CocktailIcon className="icon" strokeWidth={2} /> Cocktails
+                    </Link>
                 </Routes>
 
                 <div>

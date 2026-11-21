@@ -144,7 +144,7 @@ export const ListIngredientsHeading = styled.div`
     }
 `;
 
-export const ChekedAmount = styled.span`
+export const CheckedAmount = styled.span`
     font-size: 0.75rem;
     padding-inline: 0.75rem;
     padding-block: 0.25rem;
