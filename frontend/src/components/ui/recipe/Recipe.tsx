@@ -40,21 +40,24 @@ const relatedRecipes = [
 ];
 
 export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
-    const [checked, setChecked] = useState<Set<number>>(new Set());
+    const recipeKey = recipe.idMeal ?? recipe.idDrink ?? recipe.strMeal ?? recipe.strDrink ?? 'recipe';
+    const [checkedState, setCheckedState] = useState<{ key: string; items: Set<number> }>({
+        key: recipeKey,
+        items: new Set(),
+    });
+    const checked = checkedState.key === recipeKey ? checkedState.items : new Set<number>();
 
-    const handleIngredients = () => {
-        const ingredients: string[] = [];
-        
-        for (let i = 1; i <= 20; i++) {
-            if (recipe[`strIngredient${i}`]) {
-                const ingredient = recipe[`strIngredient${i}`];
-                const quantity = recipe[`strMeasure${i}`];
-                
-                if(ingredient !== '' && quantity !== '' ) ingredients.push(`${ingredient} - ${quantity}`);
-            }
+    const ingredients: string[] = [];
+    for (let i = 1; i <= 20; i++) {
+        const rawIngredient = recipe[`strIngredient${i}`];
+        const ingredient = typeof rawIngredient === 'string' ? rawIngredient.trim() : '';
+
+        if (ingredient) {
+            const rawMeasure = recipe[`strMeasure${i}`];
+            const quantity = typeof rawMeasure === 'string' ? rawMeasure.trim() : '';
+
+            ingredients.push(quantity ? `${ingredient} - ${quantity}` : ingredient);
         }
-        
-        return ingredients;
     }
 
     const splitInstructions = (steps: string): string[] => {
@@ -62,15 +65,23 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
             .split(".")
             .map(step => step.trim())
             .filter(step => step.length > 0);
-    }
+    };
 
     const toggleIngredient = (i: number) => {
-        setChecked(prev => {
-            const next = new Set(prev)
-            next.has(i) ? next.delete(i) : next.add(i)
-            return next
-        })
-    }
+        setCheckedState(prev => {
+            const base = prev.key === recipeKey ? prev.items : new Set<number>();
+            const next = new Set(base);
+            if (next.has(i)) {
+                next.delete(i);
+            } else {
+                next.add(i);
+            }
+            return { key: recipeKey, items: next };
+        });
+    };
+
+    const origin = recipe.strArea ?? recipe.strCountry;
+    const instructions = splitInstructions(recipe.strInstructions ?? '');
     
     return (
         <BgCont>
@@ -113,13 +124,13 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
                             {tag}
                         </HeroTag>
 
-                        {recipe.strCountry && (
+                        {origin && (
                             <HeroTag>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
                                 </svg>
 
-                                {recipe.strCountry}
+                                {origin}
                             </HeroTag>
                         )}
                     </HeroTagsCont>
@@ -135,11 +146,11 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
                             <ListIngredientsHeading>
                                 <h2 className="font-display">Ingredients</h2>
 
-                                {checked.size > 0 && <ChekedAmount>{checked.size} / {handleIngredients().length} Checked</ChekedAmount>}
+                                {checked.size > 0 && <ChekedAmount>{checked.size} / {ingredients.length} Checked</ChekedAmount>}
                             </ListIngredientsHeading>
 
                             <IngredientUl>
-                                {handleIngredients().map((ingredient, index) => (
+                                {ingredients.map((ingredient, index) => (
                                     <IngredientLi
                                         key={index}
                                     >
@@ -147,11 +158,12 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
                                             type="checkbox"
                                             name="checkDone"
                                             id={`ingredient-${index}`}
+                                            checked={checked.has(index)}
+                                            onChange={() => toggleIngredient(index)}
                                         />
-                                        <label 
-                                            htmlFor={`ingredient-${index}`} 
+                                        <label
+                                            htmlFor={`ingredient-${index}`}
                                             className="checkDone"
-                                            onClick={() => toggleIngredient(index)}
                                             style={{ color: checked.has(index) ? 'var(--muted-foreground)' : 'var(--foreground)', textDecoration: checked.has(index) ? 'line-through' : 'none' }}
                                         >
                                             <span>{ingredient}</span>
@@ -165,7 +177,7 @@ export const RecipeComponent = ({recipe, tag}: RecipeProps) => {
                             <h2 className="font-display">How to Cook</h2>
 
                             <div>
-                                {splitInstructions(recipe.strInstructions as string).map((step, index) => (
+                                {instructions.map((step, index) => (
                                     <InstructionsCont key={index}>
                                         <InstructionNumber className="font-display">{index + 1}</InstructionNumber>
                                         <InstructionStep>{step}</InstructionStep>

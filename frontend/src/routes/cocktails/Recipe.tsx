@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { getRecipe } from "../../api/api-actions";
 import type { ApiRecipe } from "../../types/api-types";
 import { RecipeComponent } from "../../components/ui/recipe/Recipe";
 import Loader from "../../components/ui/Loader";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 export default function RecipeCocktail() {
     const [recipe, setRecipe] = useState<ApiRecipe | null>(null);
@@ -12,31 +13,49 @@ export default function RecipeCocktail() {
 
     const location = useLocation();
 
-    window.scrollTo(0, 0);
-    
+    useScrollToTop(location.pathname);
+
     useEffect(() => {
+        let isCancelled = false;
+
         const fetchRecipe = async () => {
-            const id = location.pathname.split('/')[3]; //15346
+            const id = location.pathname.split('/')[3] ?? '';
+            setLoading(true);
 
             try {
-                const data: ApiRecipe = await getRecipe('cocktails', id);
-
-                setRecipe(data);
-                setLoading(false);
+                const data = await getRecipe('cocktails', id);
+                if (!isCancelled) {
+                    setRecipe(data);
+                }
             } catch (error) {
                 console.error(error);
-                setRecipe(null);
+                if (!isCancelled) {
+                    setRecipe(null);
+                }
+            } finally {
+                if (!isCancelled) {
+                    setLoading(false);
+                }
             }
-        }
+        };
 
         fetchRecipe();
-    }, [location])
 
-    if(loading) return <Loader />;
+        return () => {
+            isCancelled = true;
+        };
+    }, [location]);
 
-    if(recipe) return(
-        <>
-            <RecipeComponent recipe={recipe} tag="cocktails" />
-        </>
-    )
+    if (loading) return <Loader />;
+
+    if (!recipe) {
+        return (
+            <div className="container all-center" style={{ minHeight: '60vh', flexDirection: 'column', gap: '1rem', textAlign: 'center' }}>
+                <h2 className="font-display">Recipe not found</h2>
+                <Link to="/cocktails" style={{ color: 'var(--primary)', fontWeight: 600 }}>Back to cocktail categories</Link>
+            </div>
+        );
+    }
+
+    return <RecipeComponent recipe={recipe} tag="cocktails" />;
 }

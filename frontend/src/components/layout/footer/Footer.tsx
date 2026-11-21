@@ -59,8 +59,8 @@ export const Footer = () => {
 
                         <NavLinks>
                             {[
-                                { label: 'Meal Recipes', target: 'meals' },
-                                { label: 'Cocktail Recipes', target: 'cocktails' },
+                                { label: 'Meal Recipes', target: '/meals' },
+                                { label: 'Cocktail Recipes', target: '/cocktails' },
                                 { label: 'Favourites', target: '/' },
                             ].map((link) => (
                                 <Link 

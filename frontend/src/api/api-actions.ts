@@ -1,6 +1,17 @@
-import type { TagRecipe } from "../types/api-types";
+import { z } from "zod";
+import {
+    ApiCategoriesSchema,
+    ApiDrinkCategorySchema,
+    ApiMealCategorySchema,
+    RecipeSchema,
+    type ApiCategories,
+    type ApiDrinkCategory,
+    type ApiMealCategory,
+    type ApiRecipe,
+    type TagRecipe,
+} from "../types/api-types";
 
-const COCKTAILS = [
+const COCKTAILS: ApiCategories[] = [
     {
         idCategory: '1',
         strCategory: 'Cocktail',
@@ -67,36 +78,55 @@ const COCKTAILS = [
         strCategoryDescription: 'Soft drinks are non-alcoholic beverages that are usually carbonated and sweetened.',
         strCategoryThumb: 'https://res.cloudinary.com/dkav9fvlo/image/upload/v1738363930/Cocktail-categories-api/s4nuknxwnlv6rjptqrne.avif'
     }
-]
+];
 
-export async function getCategories(url: string) {
+async function fetchJson(url: string): Promise<unknown> {
+    const response = await fetch(url);
+    if (response.ok === false) {
+        throw new Error(`HTTP error ${response.status} while fetching ${url}`);
+    }
+    return response.json();
+}
+
+const CategoriesResponseSchema = z.object({
+    categories: z.array(ApiCategoriesSchema).nullable(),
+});
+
+const RecipesResponseSchema = z.object({
+    drinks: z.array(ApiDrinkCategorySchema).nullable().optional(),
+    meals: z.array(ApiMealCategorySchema).nullable().optional(),
+});
+
+const RecipeLookupResponseSchema = z.object({
+    meals: z.array(RecipeSchema).nullable().optional(),
+    drinks: z.array(RecipeSchema).nullable().optional(),
+});
+
+export async function getCategories(url: string): Promise<ApiCategories[]> {
     if (url.includes('cocktail')) {
         return COCKTAILS;
-    } else {
-        const res = await fetch(url).then(respuesta => respuesta.json());
-
-        return res.categories;
     }
-};
 
-export async function getRecipes(url: string) {
-    const res = await fetch(url).then(respuesta => respuesta.json());
+    const raw = await fetchJson(url);
+    const parsed = CategoriesResponseSchema.parse(raw);
+    return parsed.categories ?? [];
+}
 
-    return res.drinks ?? res.meals;
-};
+export async function getRecipes(url: string): Promise<ApiMealCategory[] | ApiDrinkCategory[]> {
+    const raw = await fetchJson(url);
+    const parsed = RecipesResponseSchema.parse(raw);
+    return parsed.drinks ?? parsed.meals ?? [];
+}
 
-export async function getRecipe(type: TagRecipe, id: string) {
-    if (type === 'meals') {
-        const url = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + id;
+export async function getRecipe(type: TagRecipe, id: string): Promise<ApiRecipe | null> {
+    const baseUrl =
+        type === 'meals'
+            ? 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
+            : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 
-        const res = await fetch(url).then(respuesta => respuesta.json());
+    const raw = await fetchJson(`${baseUrl}${id}`);
+    const parsed = RecipeLookupResponseSchema.parse(raw);
+    const items = type === 'meals' ? parsed.meals : parsed.drinks;
 
-        return res.meals[0];
-    } else if (type === 'cocktails') {
-        const url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + id;
-
-        const res = await fetch(url).then(respuesta => respuesta.json());
-
-        return res.drinks[0];
-    }
-};
+    return items?.[0] ?? null;
+}

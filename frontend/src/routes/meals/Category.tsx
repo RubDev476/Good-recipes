@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 
 import { getRecipes } from "../../api/api-actions";
 import type { ApiMealCategory } from "../../types/api-types";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
 import Loader from "../../components/ui/Loader.tsx";
@@ -15,26 +16,39 @@ export default function CategoryMeals() {
 
     const location = useLocation();
 
-    window.scrollTo(0, 0);
+    useScrollToTop(location.pathname);
 
     useEffect(() => {
+        let isCancelled = false;
+
         const fetchCategory = async () => {
-            const category = location.pathname.split('/')[3];
-            setCategory(category);
+            const category = location.pathname.split('/')[3] ?? '';
+            setCategory(decodeURIComponent(category));
+            setLoading(true);
 
             try {
-                const data: ApiMealCategory[] = await getRecipes(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-
-                setRecipes(data);
-                setLoading(false);
+                const data = (await getRecipes(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)) as ApiMealCategory[];
+                if (!isCancelled) {
+                    setRecipes(data);
+                }
             } catch (error) {
                 console.error(error);
-                setRecipes([]);
+                if (!isCancelled) {
+                    setRecipes([]);
+                }
+            } finally {
+                if (!isCancelled) {
+                    setLoading(false);
+                }
             }
-        }
+        };
 
         fetchCategory();
-    }, [location])
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [location]);
 
     return (
         <>
@@ -42,9 +56,9 @@ export default function CategoryMeals() {
 
             {!loading ? (
                 <RecipesLayout recipes={recipes} tag={'meals'} title="" />
-            ): (
+            ) : (
                 <Loader />
             )}
         </>
-    )
+    );
 }

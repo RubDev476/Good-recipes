@@ -1,31 +1,35 @@
 import { z } from "zod";
 
-const ApiCategoriesSchema = z.object({
+export const ApiCategoriesSchema = z.object({
     idCategory: z.string(),
     strCategory: z.string(),
     strCategoryDescription: z.string(),
-    strCategoryThumb: z.string()
+    strCategoryThumb: z.string(),
 });
 
-const ApiMealCategorySchema = z.object({
+export const ApiMealCategorySchema = z.object({
     idMeal: z.string(),
     strMeal: z.string(),
-    strMealThumb: z.string()
+    strMealThumb: z.string(),
 });
 
-const ApiDrinkCategorySchema = z.object({
+export const ApiDrinkCategorySchema = z.object({
     idDrink: z.string(),
     strDrink: z.string(),
-    strDrinkThumb: z.string()
+    strDrinkThumb: z.string(),
 });
 
-interface RecipeModel {
-    strInstructions: z.ZodString;
-    [prop: string]: z.ZodString | z.ZodNullable<z.ZodString>;
-}
-
-const RecipeSchema = z.object<RecipeModel>({
-    strInstructions: z.string()
+export const RecipeSchema = z.looseObject({
+    idMeal: z.string().optional(),
+    idDrink: z.string().optional(),
+    strMeal: z.string().optional(),
+    strDrink: z.string().optional(),
+    strCategory: z.string().nullable().optional(),
+    strArea: z.string().nullable().optional(),
+    strCountry: z.string().nullable().optional(),
+    strMealThumb: z.string().nullable().optional(),
+    strDrinkThumb: z.string().nullable().optional(),
+    strInstructions: z.string().nullable().optional(),
 });
 
 export interface ApiCategory {
@@ -40,7 +44,7 @@ export interface ApiCategory {
 
 export type ApiCategories = z.infer<typeof ApiCategoriesSchema>;
 export type ApiMealCategory = z.infer<typeof ApiMealCategorySchema>;
-export type ApiDrinkCategory = z.infer<typeof ApiDrinkCategorySchema>
-export type ApiRecipe= z.infer<typeof RecipeSchema>;
+export type ApiDrinkCategory = z.infer<typeof ApiDrinkCategorySchema>;
+export type ApiRecipe = z.infer<typeof RecipeSchema>;
 
 export type TagRecipe = 'meals' | 'cocktails';

@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 
 import { getRecipes } from "../../api/api-actions";
 import type { ApiDrinkCategory } from "../../types/api-types";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 import RecipesLayout from "../../pageComponents/recipes/RecipesLayout.tsx";
 import Loader from "../../components/ui/Loader.tsx";
@@ -15,26 +16,40 @@ export default function CategoryCocktails() {
 
     const location = useLocation();
 
-    window.scrollTo(0, 0);
+    useScrollToTop(location.pathname);
 
     useEffect(() => {
-        const fetchCategorie = async () => {
-            const category = location.pathname.split('/')[3].replace('_', '/');
-            setCategory(category.split('%20').join(' '));
+        let isCancelled = false;
+
+        const fetchCategory = async () => {
+            const rawCategory = location.pathname.split('/')[3] ?? '';
+            const category = rawCategory.replace(/_/g, '/');
+            setCategory(decodeURIComponent(category));
+            setLoading(true);
 
             try {
-                const data: ApiDrinkCategory[] = await getRecipes(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-
-                setRecipes(data);
-                setLoading(false);
+                const data = (await getRecipes(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)) as ApiDrinkCategory[];
+                if (!isCancelled) {
+                    setRecipes(data);
+                }
             } catch (error) {
                 console.error(error);
-                setRecipes([]);
+                if (!isCancelled) {
+                    setRecipes([]);
+                }
+            } finally {
+                if (!isCancelled) {
+                    setLoading(false);
+                }
             }
-        }
+        };
 
-        fetchCategorie();
-    }, [])
+        fetchCategory();
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [location]);
 
     return (
         <>
@@ -46,5 +61,5 @@ export default function CategoryCocktails() {
                 <Loader />
             )}
         </>
-    )
+    );
 }

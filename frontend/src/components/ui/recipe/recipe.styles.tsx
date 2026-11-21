@@ -44,7 +44,8 @@ export const HeroInfoCont = styled.div`
 
 export const HeroBackCategoriesBtn = styled(Link)`
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
+    width: fit-content;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
