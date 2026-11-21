@@ -9,13 +9,12 @@ export const useFetchCategories = (url: string) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const data: ApiCategories[] = await getCategories(url)
-                setCategories(data)
-                console.log('fetchCategories successful');
+                const data: ApiCategories[] = await getCategories(url);
+                setCategories(data);
             } catch (error) {
-                console.log(error);
-                setCategories(null)
-                setError('Error in fetchCategories')
+                console.error(error);
+                setCategories(null);
+                setError('Error in fetchCategories');
             }
         }
 

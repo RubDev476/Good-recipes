@@ -25,12 +25,10 @@ export default function CategoryCocktails() {
             try {
                 const data: ApiDrinkCategory[] = await getRecipes(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
 
-                //console.log(data);
-
                 setRecipes(data);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 setRecipes([]);
             }
         }

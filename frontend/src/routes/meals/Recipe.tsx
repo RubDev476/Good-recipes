@@ -21,12 +21,10 @@ export default function RecipeMeal() {
             try {
                 const data: ApiRecipe = await getRecipe('meals', id);
 
-                //console.log(data);
-
                 setRecipe(data);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 setRecipe(null);
             }
         }

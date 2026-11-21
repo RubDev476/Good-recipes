@@ -65,7 +65,6 @@ export const TextCont = styled.div`
 
 export const FormCont = styled.div`
     width: 100%;
-    //max-width: 448px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -75,11 +74,8 @@ export const FormCont = styled.div`
 
     .cont {
         width: 100%;
-        //max-width: 1280px;
         max-width: 28rem;
         box-sizing: border-box;
-        //margin-inline: auto;
-        //margin-block: auto;
     }
 `;
 
@@ -141,73 +137,6 @@ export const HeadingFormCont = styled.div`
         margin: 0;
         font-size: 0.875rem;
         color: var(--muted-foreground);
-    }
-`;
-
-export const FloatingInputCont = styled.div`
-    position: relative;
-    margin-bottom: 1.25rem;
-    display: flex;
-
-    label {
-        position: absolute;
-        left: 1rem;
-        font-size: 0.875rem;
-        pointer-events: none;
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.2s;
-    }
-
-    input {
-        width: 100%;
-        border-radius: 0.75rem;
-        padding-inline: 1rem;
-        padding-bottom: 0.75rem;
-        padding-top: 1.5rem;
-        font-size: 0.875rem;
-        outline-style: none;
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.2s;
-    }
-`;
-
-export const ForgotPassCont = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1.5rem;
-
-    button {
-        color: var(--muted-foreground);
-        font-size: 0.75rem;
-        background: none;
-        border: none;
-
-        &:hover {
-            color: var(--foreground);
-        }
-    }
-`;
-
-export const ActionBtn = styled.button`
-    width: 100%;
-    padding-block: 0.875rem;
-    border-radius: 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    border: none;
-    background: var(--primary);
-    color: var(--foreground);
-    transition: all .2s ease-in-out;
-
-    &:hover {
-        opacity: 90%;
-    }
-
-    &:active {
-        scale: 0.98;
     }
 `;
 

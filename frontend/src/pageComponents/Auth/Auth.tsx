@@ -1,12 +1,9 @@
 import {
-    //ActionBtn,
     AuthCont,
     AuthImg,
     AuthImgCont,
     AuthImgGradient,
     ContinueWith,
-    //FloatingInputCont,
-    //ForgotPassCont,
     FormCont,
     GoogleBtn,
     HeadingFormCont,
@@ -19,7 +16,6 @@ import {
 } from "./Auth.style";
 
 import Logo from "../../components/ui/Logo";
-//import { useState } from "react";
 
 type AuthProps = {
     mode: 'login' | 'register';
@@ -84,46 +80,6 @@ export default function Auth({ mode }: AuthProps) {
     )
 }
 
-/*function FloatingInput({
-    label,
-    type
-}: {
-    label: string;
-    type: string;
-}) {
-    const [focused, setFocused] = useState(false);
-    const [value, setValue] = useState("");
-
-    return (
-        <FloatingInputCont>
-            <label
-                style={{
-                    top: focused || value ? '8px' : '50%',
-                    transform: focused || value ? 'translateY(0)' : 'translateY(-50%)',
-                    fontSize: focused || value ? '11px' : '14px',
-                    color: focused ? 'var(--primary)' : 'var(--muted-foreground)',
-                    fontWeight: focused || value ? '500' : '400',
-                }}
-            >
-                {label}
-            </label>
-            <input
-                type={type}
-                onFocus={() => setFocused(true)}
-                onBlur={() => setFocused(false)}
-                onChange={(e) => setValue(e.target.value)}
-                value={value}
-                className="w-full rounded-xl px-4 pb-3 pt-6 text-sm outline-none transition-all"
-                style={{
-                    background: 'var(--secondary)',
-                    border: `2px solid ${focused ? 'var(--primary)' : 'var(--border)'}`,
-                    color: 'var(--foreground)',
-                }}
-            />
-        </FloatingInputCont>
-    )
-}*/
-
 function LoginForm() {
     return (
         <div>
@@ -131,24 +87,6 @@ function LoginForm() {
                 <h1 className="font-display">Welcome back</h1>
                 <p>Sign in to your account to continue</p>
             </HeadingFormCont>
-
-            {/*
-             <FloatingInput
-                label="Email address"
-                type="email"
-            />
-
-            <FloatingInput
-                label="Password"
-                type="password"
-            />
-
-            <ForgotPassCont>
-                <button>Forgot password?</button>
-            </ForgotPassCont>
-
-            <ActionBtn>Sign in</ActionBtn>
-             */}
 
             <ContinueWith>
                 <div className="line" />
@@ -176,24 +114,6 @@ function RegisterForm() {
                 <h1 className="font-display">Create account</h1>
                 <p>Join the Good Recipes community</p>
             </HeadingFormCont>
-
-            {/*
-             <FloatingInput
-                label="Email address"
-                type="email"
-            />
-
-            <FloatingInput
-                label="Password"
-                type="password"
-            />
-
-            <ForgotPassCont>
-                <button>Forgot password?</button>
-            </ForgotPassCont>
-
-            <ActionBtn>Sign in</ActionBtn>
-             */}
 
             <ContinueWith>
                 <div className="line" />

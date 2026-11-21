@@ -2,51 +2,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300..700&display=swap');
 
 :root {
-    --color-1: #e50077;
-    --color-2: #471f05;
-    --color-3: #252525;
-    --color-4: #252525;
-    --color-5: #ffffff;
-    --color-6: #efe8e2;
-    --color-7: #252525;
-    --color-8: #ede7e2;
-    --color-9: #f2af29;
-    --color-10: #006600;
-    --color-11: #ea4335;
-    --color-12: #ea4335;
-    --color-13: #ed7d42;
-    --color-14: #471f05;
-    --color-15: #db3229;
+  --background: #0d0c0b;
+  --foreground: #f2ede3;
+  --card: #161412;
+  --card-foreground: #f2ede3;
+  --primary: #e8187a;
+  --primary-foreground: #ffffff;
+  --secondary: #1f1d1a;
+  --secondary-foreground: #c8bfb0;
+  --muted: #2a2724;
+  --muted-foreground: #8a7f70;
+  --accent: #f5c842;
+  --accent-foreground: #0d0c0b;
+  --border: #2a2724;
+  --ring: #e8187a;
+  --radius: 0.75rem;
+  --font-fraunces: 'Fraunces', serif;
+  --font-outfit: 'Outfit', sans-serif;
 
-
-    /*NEW variables*/
-    --background: #0d0c0b;
-    --foreground: #f2ede3;
-    --card: #161412;
-    --card-foreground: #f2ede3;
-    --primary: #e8187a;
-    --primary-foreground: #ffffff;
-    --secondary: #1f1d1a;
-    --secondary-foreground: #c8bfb0;
-    --muted: #2a2724;
-    --muted-foreground: #8a7f70;
-    --accent: #f5c842;
-    --accent-foreground: #0d0c0b;
-    --border: #2a2724;
-    --ring: #e8187a;
-    --radius: 0.75rem;
-    --font-fraunces: 'Fraunces', serif;
-    --font-outfit: 'Outfit', sans-serif;
-
-    --swiper-theme-color: var(--primary);
-    --swiper-pagination-bullet-inactive-color: var(--card-foreground);
+  --swiper-theme-color: var(--primary);
+  --swiper-pagination-bullet-inactive-color: var(--card-foreground);
 }
 
 html {
-    font-size: 16px;
-    /*scroll-behavior: smooth;*/
+  font-size: 16px;
 }
-               
+
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -58,134 +39,25 @@ body {
   font-family: var(--font-fraunces);
 }
 
-.text-color-1 {
-    color: var(--color-1);
-}
-
-.text-color-2 {
-    color: var(--color-2);
-}
-
 .container {
-    width: 100%;
-    max-width: 1280px;
-    margin: auto;
-    box-sizing: border-box;
-    padding: .7rem 1.5rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0.7rem 1.5rem;
 }
 
 .all-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .w-full {
-    width: 100%;
+  width: 100%;
 }
 
 .loader-page {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
-
-.formContainer {
-    width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-
-    .formImage {
-        height: 10rem;
-        width: 100%;
-        max-width: 100dvw;
-        background-image: url("/images/form-pages.webp");
-        background-position: center;
-        background-size: cover;
-    }
-
-    .form {
-        width: 100%;
-        display: flex;
-        flex-flow: column nowrap;
-        align-items: center;
-        justify-content: center;
-        margin: 0 0 2rem 0;
-
-        .formTitle {
-            width: 100%;
-            text-align: center;
-            font-size: 1.3em;
-        }
-
-        .inputFieldContainer {
-            width: 90%;
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            max-width: 350px;
-
-            .inputFieldLabel {
-                width: 100%;
-                height: 1.2rem;
-                cursor: pointer;
-                text-align: left;
-                margin-bottom: 5px;
-            }
-
-            .inputField {
-                background-color: transparent;
-                width: 100%;
-                padding: 0.5rem;
-                border-radius: 2rem;
-                border: 1px solid var(--color-1);
-                outline: 1px solid transparent;
-                transition: all 0.3s ease-in-out;
-                font-size: 1em;
-                text-align: center;
-                box-sizing: border-box;
-            }
-
-            .inputField:focus {
-                outline: 1px solid var(--color-1);
-            }
-        }
-
-        .submitButton {
-            margin: 2rem 0 0 0;
-            padding: .5rem;
-            border-radius: 100px;
-            width: 10rem;
-            transition: all 0.3s ease-in-out;
-            background-color: var(--color-1);
-            color: var(--color-5);
-            border: 1px solid var(--color-1);
-        }
-
-        .submitButton:hover {
-            margin: 2rem 0 0 0;
-            padding: .5rem;
-            border-radius: 100px;
-            background-color: var(--color-5);
-            color: var(--color-1);
-            border: 1px solid var(--color-1);
-            font-weight: bold;
-        }
-    }
-}
-
-@media screen and (min-width: 940px) {
-    .formContainer {
-            font-size: 18px;
-            flex-direction: row;
-    
-            .formImage {
-                height: 70vh;
-            }
-        }
-}
-

@@ -18,7 +18,6 @@ export const CardRecipe: React.FC<CardRecipeProps> = ({ title, img, tag, id, cou
                     <S.RecipeImgContainer>
                         <img src={img} alt={title} className="recipe-image" />
                         <S.GradientOverlay />
-                        {/*<S.RecipeTime>{30} min</S.RecipeTime>*/}
                         {tag === 'meals' && <S.RecipeTime>{country}</S.RecipeTime>}
                     </S.RecipeImgContainer>
 
