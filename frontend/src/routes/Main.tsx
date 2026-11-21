@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import MainContent from "../pageComponents/main/mainContent/MainContent";
 import SectionSlider from "../pageComponents/main/sectionSlider/SectionSlider";
 import ViewMoreSection from "../pageComponents/main/ViewMoreSection/ViewMoreSection.tsx";
@@ -265,7 +266,9 @@ export default function Main() {
     const hour = new Date().getHours();
     const time = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
 
-    window.scrollTo(0, 0);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     
     return (
         <>
